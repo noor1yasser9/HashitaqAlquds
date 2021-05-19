@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "123965609668",
+    "project_id": "hashitaqalquds",
+    "storage_bucket": "hashitaqalquds.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123965609668:android:f5eda1c4be42705e6e9b91",
+        "android_client_info": {
+          "package_name": "com.nurbk.ps.hashitaqalquds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123965609668-a8km9pa8e8ov0mmrmsgeev3b2185qff0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1eNSyRFTkwpJxy1RXi-XyqfbVemFpvG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123965609668-a8km9pa8e8ov0mmrmsgeev3b2185qff0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
