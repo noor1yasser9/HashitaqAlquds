@@ -15,9 +15,9 @@
             app:destination="@id/welcomeFragment"
             app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/slide_down"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down"
-            app:launchSingleTop="true"
             app:popUpTo="@+id/main_nav"
             app:popUpToInclusive="true" />
     </fragment>
@@ -27,7 +27,27 @@
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.splash.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_signInFragment"
+            app:destination="@id/SignInFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/SignInFragment"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.auth.SignInFragment"
+        android:label="fragment_verfiy_your_phone"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_LoginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
 
     <fragment

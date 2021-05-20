@@ -61,7 +61,7 @@
                motion:framePosition="100"
                android:scaleY="1"
                android:scaleX="1"
-               android:translationY="330dp"
+               android:translationY="350dp"
                />
 
        </KeyFrameSet>
