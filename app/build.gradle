@@ -88,8 +88,8 @@ dependencies {
     //lottie
     implementation 'com.airbnb.android:lottie:3.5.0'
 
-    // IndicatorSeekBar
-    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
+    //ViewPager2
+    implementation 'com.tbuonomo:dotsindicator:4.2'
 
 
     //Dagger - Hilt -------->
