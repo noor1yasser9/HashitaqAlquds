@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL;
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -45,6 +46,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.profileFragment -> {
                     navController.navigate(R.id.profileFragment, null, getNavOptions())
                 }
+                R.id.homeFragment -> {
+                    navController.navigate(R.id.profileFragment, null, getNavOptions())
+                }
+                R.id.mapFragment -> {
+                    navController.navigate(R.id.profileFragment, null, getNavOptions())
+                }
                 else -> {
                     navController.navigate(item.itemId, null, null)
                 }
@@ -56,11 +63,11 @@ class MainActivity : AppCompatActivity() {
         navHostFragment.findNavController()
             .addOnDestinationChangedListener { _: NavController?, destination: NavDestination, arguments: Bundle? ->
                 when (destination.id) {
-//                    R.id.splashFragment -> {
-//                        window.apply {
-//                            addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-//                        }
-//                    }
+                    R.id.splashFragment -> {
+                        window.apply {
+                            addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+                        }
+                    }
                     R.id.homeFragment, R.id.mapFragment, R.id.profileFragment -> {
                         window.apply {
                             clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
@@ -80,10 +87,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getNavOptions(): NavOptions {
         return NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_up)
-            .setExitAnim(R.anim.slide_down)
-            .setPopEnterAnim(R.anim.slide_up)
-            .setPopExitAnim(R.anim.slide_down)
+            .setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.slide_out_left)
+            .setPopEnterAnim(R.anim.slide_in_left)
+            .setPopExitAnim(R.anim.slide_out_right)
             .build()
     }
+
 }
