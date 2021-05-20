@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
@@ -36,21 +37,18 @@ class WelcomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<W
         super.onViewCreated(view, savedInstanceState)
 
         mAdapter.submitList(getData(requireContext()))
-        
+
         mBinding.vpWelcome.apply {
             adapter = mAdapter
             mBinding.dotsIndicator.setViewPager2(this)
         }
 
         mBinding.btnSignIn.setOnClickListener {
-//            findNavController().navigate(R.id.action_welcomeFragment_to_verfiyYourPhoneFragment)
-
+            findNavController().navigate(R.id.action_welcomeFragment_to_signInFragment)
         }
 
 
-
     }
-
 
 
     override fun onClickItem(itemViewModel: Welcome, type: Int) {
