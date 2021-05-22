@@ -40,22 +40,25 @@ class MainActivity : AppCompatActivity() {
             mBinding.bottomNavigation,
             navController
         )
-
+var id= 0
         mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.profileFragment -> {
-                    navController.navigate(R.id.profileFragment, null, getNavOptions())
+                    if (item.itemId != id)
+                        navController.navigate(R.id.profileFragment, null, getNavOptions())
+
                 }
                 R.id.homeFragment -> {
+                    if (item.itemId != id)
                     navController.navigate(R.id.profileFragment, null, getNavOptions())
                 }
                 R.id.mapFragment -> {
+                    if (item.itemId != id)
                     navController.navigate(R.id.profileFragment, null, getNavOptions())
                 }
-                else -> {
-                    navController.navigate(item.itemId, null, null)
-                }
+
             }
+            id=item.itemId
             true
         }
 
