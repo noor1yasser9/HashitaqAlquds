@@ -1,6 +1,7 @@
 package com.nurbk.ps.hashitaqalquds.other
 
 import android.app.*
+import android.util.Log
 import androidx.core.view.isVisible
 import com.nurbk.ps.hashitaqalquds.databinding.ToolbarLayoutBinding
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -13,6 +14,7 @@ fun Activity.setToolbarView(
     idMenu: Int,
     onComplete: () -> Unit
 ): ToolbarLayoutBinding {
+
 
     view.tvTitle.text = title
     view.btnBack.isVisible = !isMane
