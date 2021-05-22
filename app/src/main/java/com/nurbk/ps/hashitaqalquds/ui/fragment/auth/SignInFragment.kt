@@ -25,17 +25,15 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().setToolbarView(
-            mBinding.toolbarView,
-            title = getString(R.string.home),
-            isMane = true,
-            idMenu = 0
-        ) {
 
-        }
 
         mBinding.btnSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
         }
+
+        mBinding.createSignUp.setOnClickListener {
+            findNavController().navigate(R.id.action_SignInFragment_to_signUpFragment)
+        }
+
     }
 }
