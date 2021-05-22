@@ -6,83 +6,200 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <include
-            android:id="@+id/toolbarView"
-            layout="@layout/toolbar_layout"
-            android:elevation="@dimen/_4sdp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_16sdp"
+                    android:text="@string/txtSignIn"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_24sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:id="@+id/image1"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_margin="@dimen/_40sdp"
-            android:src="@drawable/ic_cloud"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginVertical="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:srcCompat="@drawable/ic_img" />
 
-        <ImageView
-            android:id="@+id/image2"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_marginHorizontal="@dimen/_70sdp"
-            android:layout_marginVertical="@dimen/_90sdp"
-            android:alpha="0.8"
-            android:src="@drawable/ic_cloud"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_margin="@dimen/_40sdp"
+                    android:src="@drawable/ic_cloud"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_margin="@dimen/_30sdp"
-            android:alpha="0.8"
-            android:src="@drawable/ic_cloud"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginHorizontal="@dimen/_70sdp"
+                    android:layout_marginVertical="@dimen/_90sdp"
+                    android:alpha="0.8"
+                    android:src="@drawable/ic_cloud"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/image4"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_margin="@dimen/_50sdp"
-            android:alpha="0.8"
-            android:src="@drawable/ic_cloud"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.04"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_margin="@dimen/_30sdp"
+                    android:alpha="0.8"
+                    android:src="@drawable/ic_cloud"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/image5"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_margin="@dimen/_50sdp"
-            android:alpha="0.8"
-            android:src="@drawable/ic_cloud"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64" />
+                <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_margin="@dimen/_50sdp"
+                    android:alpha="0.8"
+                    android:src="@drawable/ic_cloud"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.04"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.25" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignIn"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_54sdp"
-            android:layout_marginBottom="@dimen/_60sdp"
-            android:backgroundTint="@color/green_900"
-            android:text="@string/txtSignIn"
-            android:textSize="@dimen/_24sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.9" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/image5"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_margin="@dimen/_50sdp"
+                    android:alpha="0.8"
+                    android:src="@drawable/ic_cloud"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.64" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSignIn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_marginTop="28dp"
+                    android:backgroundTint="@color/green_900"
+                    android:text="@string/txtSignIn"
+                    android:textSize="@dimen/_24sdp"
+                    app:cornerRadius="@dimen/_4sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/txtPassword"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/txtPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGaset"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:text="@string/txtGest"
+                    android:textColor="@color/green_900"
+                    android:textSize="@dimen/_24sdp"
+                    app:cornerRadius="@dimen/_4sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/txtPassword"
+                    app:layout_constraintStart_toStartOf="@+id/txtPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
+                    app:layout_constraintWidth_percent="0.9"
+                    app:strokeColor="@color/green_900"
+                    app:strokeWidth="@dimen/_3sdp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtEmail"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    app:boxStrokeColor="@color/input_box_tint"
+                    app:hintTextColor="@color/textColor"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    app:layout_constraintWidth_percent="0.9">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/zahra_ln_line_grunge"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:textSize="@dimen/_20ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:hint="@string/password"
+                    app:boxStrokeColor="@color/input_box_tint"
+                    app:hintTextColor="@color/textColor"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+                    app:layout_constraintWidth_percent="0.9"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/zahra_ln_line_grunge"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/_20ssp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forGotPassword"
+                    android:textSize="@dimen/_16sdp"
+                    android:padding="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/txtPassword"
+                    app:layout_constraintStart_toStartOf="@+id/txtPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+
+                <TextView
+                    android:id="@+id/createSignUp"
+                    android:layout_width="0dp"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@string/createAccount"
+                    android:gravity="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="@+id/txtPassword"
+                    app:layout_constraintStart_toStartOf="@+id/txtPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/btnGaset" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>

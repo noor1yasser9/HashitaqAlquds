@@ -5,8 +5,17 @@
     <string name="w2">القدس ليست خيمة عربية ضاعت فردد شاعر أنفاسها.. القدس ليست قصة وهمية تذرو الرياح الذاريات كلامها.. القدس تولد من هنا شمسها ومن الروابي يحتسين ضرامها ومن العقول وقد تبلج نورها ومن الحضارة ركزت أعلامها.</string>
     <string name="w3">يا بني صهيون يا شر البريــة القدس ليست وكركم.. القدس تأبى جمعكم.. القدس تلفظ رجسكم.. فالقدس يا أنجاس عذراء تقية.. القدس يا أدناس طاهرة نقية.</string>
     <string name="txtSignIn">تسجيل دخول</string>
+    <string name="txtSignUp">انشاء حساب جديد</string>
+    <string name="txtGest">الدخول كزائر</string>
     <string name="home">الصفحة الرئيسية</string>
     <string name="map">الخريطة</string>
     <string name="profile">الصفحة الشخصية</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="phoneNumber">رقم الجوال</string>
+    <string name="name">الاسم كامل</string>
+    <string name="password">كلمة السر</string>
+    <string name="forGotPassword">هل نسيت كلمة المرور ؟</string>
+    <string name="createAccount">لا يوجد عندك حساب؟ يمكنك انشاء حساب</string>
+    <string name="doYouHaveAccount">هل يوجد لديك حساب؟ قم بتسجل دخول</string>
 
 </resources>
