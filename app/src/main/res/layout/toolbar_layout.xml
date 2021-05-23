@@ -82,11 +82,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/btnMenu"
                             app:layout_constraintStart_toEndOf="@+id/btnBack"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@string/txtSignIn" />
-
-
-
-
+                             />
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/btnMenu"

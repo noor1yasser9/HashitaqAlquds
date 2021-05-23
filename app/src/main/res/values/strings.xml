@@ -17,5 +17,16 @@
     <string name="forGotPassword">هل نسيت كلمة المرور ؟</string>
     <string name="createAccount">لا يوجد عندك حساب؟ يمكنك انشاء حساب</string>
     <string name="doYouHaveAccount">هل يوجد لديك حساب؟ قم بتسجل دخول</string>
+    <string name="addPost">نشر منشور</string>
+    <string name="selectHashtag">اختر هشتاق</string>
+    <string name="contentPost">محتوى المنشور</string>
+    <string name="share">مشاركة</string>
 
+
+    <string-array name="data">
+        <item>اختر هشتاق</item>
+        <item>اختر هشتاق</item>
+        <item>اختر هشتاق</item>
+        <item>اختر هشتاق</item>
+    </string-array>
 </resources>

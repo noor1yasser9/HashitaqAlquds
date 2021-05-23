@@ -63,7 +63,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_dialogAddPost"
+            app:destination="@id/dialogAddPost"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.MapFragment"
@@ -76,5 +85,9 @@
         android:id="@+id/signUpFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.auth.SignUpFragment"
         android:label="SignUpFragment" />
+    <dialog
+        android:id="@+id/dialogAddPost"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.DialogAddPost"
+        android:label="DialogAddPost" />
 
 </navigation>
