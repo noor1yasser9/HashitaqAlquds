@@ -31,22 +31,3 @@ fun Activity.setToolbarView(
 }
 
 
-//fun Activity.getSnackBar(@LayoutRes layoutId: Int, view: View, message: String): View {
-////    val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-////
-////    val custom = this.layoutInflater.inflate(layoutId, null)
-////
-////    snackbar.view.setBackgroundColor(Color.TRANSPARENT)
-////    val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-////    snackbarLayout.setPadding(0, 0, 0, 218)
-////
-////    custom.findViewById<RoundCornerProgressBar>(R.id.item_progress).progress = 100f
-////
-////    custom.findViewById<TextView>(R.id.txtMessage).text = message
-////
-////    snackbarLayout.addView(custom)
-////    snackbar.show()
-//    return custom
-//}
-
-
