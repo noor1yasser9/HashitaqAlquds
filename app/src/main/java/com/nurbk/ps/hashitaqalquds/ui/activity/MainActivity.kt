@@ -50,11 +50,11 @@ var id= 0
                 }
                 R.id.homeFragment -> {
                     if (item.itemId != id)
-                    navController.navigate(R.id.profileFragment, null, getNavOptions())
+                    navController.navigate(R.id.homeFragment, null, getNavOptions())
                 }
                 R.id.mapFragment -> {
                     if (item.itemId != id)
-                    navController.navigate(R.id.profileFragment, null, getNavOptions())
+                    navController.navigate(R.id.mapFragment, null, getNavOptions())
                 }
 
             }
