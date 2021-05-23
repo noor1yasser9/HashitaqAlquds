@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nurbk.ps.hashitaqalquds.R
-import com.nurbk.ps.hashitaqalquds.databinding.FragmentHomeBinding
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentProfileBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 import dagger.hilt.android.AndroidEntryPoint

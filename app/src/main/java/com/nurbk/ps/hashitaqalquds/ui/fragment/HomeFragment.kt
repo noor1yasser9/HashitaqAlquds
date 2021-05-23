@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
             isMane = true,
             idMenu = R.drawable.ic_add
         ) {
-
+            findNavController().navigate(R.id.action_homeFragment_to_dialogAddPost)
         }
     }
 
