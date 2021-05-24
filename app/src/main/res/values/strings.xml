@@ -24,6 +24,9 @@
     <string name="selectHashtag">اختر هشتاق</string>
     <string name="contentPost">محتوى المنشور</string>
     <string name="share">مشاركة</string>
+    <string name="txtHS">#القدس _عاصمة_فلسطين</string>
+    <string name="like">اعجاب</string>
+    <string name="comment">تعليق</string>
 
 
     <string-array name="data">
