@@ -102,5 +102,13 @@
         android:id="@+id/settingFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.SettingFragment"
         android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/landmarkDetailsFragment"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarkDetailsFragment"
+        android:label="LandmarkDetailsFragment" />
+    <fragment
+        android:id="@+id/landmarksFragment"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarksFragment"
+        android:label="LandmarksFragment" />
 
 </navigation>

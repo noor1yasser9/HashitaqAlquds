@@ -6,18 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nurbk.ps.hashitaqalquds.R
+import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarksBinding
+import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 
 
 class LandmarkDetailsFragment : Fragment() {
 
 
+    private val mBinding by lazy{
+        FragmentLandmarksBinding.inflate(layoutInflater)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_landmark_details, container, false)
-    }
+    ) = mBinding.root
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().setToolbarView(
+            mBinding.toolbarView,
+            title = getString(R.string.landmark),
+            isMane = false,
+            idMenu = R.drawable.ic_add
+        ){}
+    }
 
 }
