@@ -25,9 +25,28 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:src="@color/green_900"
             android:elevation="@dimen/_16sdp"
+            android:src="@drawable/ic_pdf"
+            android:padding="@dimen/_300sdp"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/header" />
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:elevation="@dimen/_16sdp"
+            android:src="@drawable/ic_pdf"
+            android:padding="@dimen/_30sdp"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/videoplayer"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:elevation="@dimen/_16sdp"
+            android:src="@color/green_900" />
 
         <include
             android:id="@+id/action"

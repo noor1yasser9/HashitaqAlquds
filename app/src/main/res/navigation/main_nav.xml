@@ -80,7 +80,16 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.auth.SignUpFragment"
@@ -89,5 +98,9 @@
         android:id="@+id/dialogAddPost"
         android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.DialogAddPost"
         android:label="DialogAddPost" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.SettingFragment"
+        android:label="SettingFragment" />
 
 </navigation>

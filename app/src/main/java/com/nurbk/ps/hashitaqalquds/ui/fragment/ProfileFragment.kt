@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentProfileBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
@@ -32,7 +33,7 @@ class ProfileFragment : Fragment() {
             isMane = true,
             idMenu = R.drawable.ic_settings
         ) {
-
+            findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
         }
     }
 }
