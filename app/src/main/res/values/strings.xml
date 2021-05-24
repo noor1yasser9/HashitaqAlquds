@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">HashitaqAlquds</string>
+    <string name="apiKey" translatable="false">AIzaSyC8R1QmcxOQTFMVhS2xjuJjUTDNZhZtIyE</string>
+
+
     <string name="title_splash">القدسُ عاصمة فلسطين الأبدية</string>
     <string name="w1">القدس أرضي.. القدس عرضي.. القدس أيامي وأحلامي النديــة.. يا من قتلتم أنبياء الله الأتقيــاء.. يا من تربيتم على سفك الدمــاء.. الذل مكتـوب عليكم والشقـــــاء.</string>
     <string name="w2">القدس ليست خيمة عربية ضاعت فردد شاعر أنفاسها.. القدس ليست قصة وهمية تذرو الرياح الذاريات كلامها.. القدس تولد من هنا شمسها ومن الروابي يحتسين ضرامها ومن العقول وقد تبلج نورها ومن الحضارة ركزت أعلامها.</string>
