@@ -38,4 +38,6 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save_change">حفظ التغيرات</string>
+    <string name="note">نبذة</string>
 </resources>
