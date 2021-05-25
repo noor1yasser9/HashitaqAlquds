@@ -15,31 +15,17 @@ class AddPostViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-
-    private val insertPostLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()
-    private val updatePostLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()
-
     fun insert(post: Post) {
-        insertPostLiveData.postValue(Result.loading(""))
-        postRepository.insert(post).addOnFailureListener {
-            insertPostLiveData.postValue(Result.error(it.message, ""))
-        }.addOnSuccessListener {
-            insertPostLiveData.postValue(Result.success(it))
-        }
+        postRepository.insert(post)
     }
 
     fun updatePost(postId: String, post: Map<String, Any>) {
-        updatePostLiveData.postValue(Result.loading(""))
-        postRepository.update(postId, post).addOnFailureListener {
-            updatePostLiveData.postValue(Result.error(it.message, ""))
-        }.addOnSuccessListener {
-            updatePostLiveData.postValue(Result.success(it))
-        }
+        postRepository.update(postId, post)
     }
 
 
     //post getting live data
-    val insertPostGetLiveData get() = insertPostLiveData
-    val updatePostGetLiveData get() = updatePostLiveData
+    val insertPostGetLiveData get() = postRepository.insertPostGetLiveData
+    val updatePostGetLiveData get() = postRepository.insertPostGetLiveData
 
 }
