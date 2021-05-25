@@ -13,6 +13,9 @@ const val EIGHT = 8
 const val NINE = 9
 const val TEN = 10
 
+const val REQUEST_IMAGE_CODE = 1
+const val REQUEST_VIDEO_CODE = 2
+const val REQUEST_FILE_CODE = 3
 
 const val COLLECTION_POST = "posts"
 const val COLLECTION_USERS = "users"
