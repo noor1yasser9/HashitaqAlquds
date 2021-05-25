@@ -34,6 +34,7 @@
     <string name="error_email">الرجاء ادخال بريد الكتورني صالح</string>
     <string name="password_error">كلمة المرور ضعيفة</string>
     <string name="error_phone">الرجاء ادخال رقم هاتف صالح</string>
+    <string name="error_post">يجب عليك اضافة نص او صورة</string>
 
     <string name="editProfile">تعديل الملف الشخصي</string>
     <string name="theme">تغيرات سمات التطبيق</string>
@@ -42,10 +43,10 @@
 
 
     <string-array name="data">
-        <item>اختر هشتاق</item>
-        <item>اختر هشتاق</item>
-        <item>اختر هشتاق</item>
-        <item>اختر هشتاق</item>
+        <item>القدس_عاصمة_فلسطين</item>
+        <item>انقذو_حي_الشيخ_جراح</item>
+        <item>غزة_تنتصر</item>
+        <item>اسرائيل_زائلة</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

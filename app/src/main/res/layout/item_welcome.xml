@@ -16,11 +16,10 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            loadImageRec="@{welcome.image}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_230sdp"
             android:layout_marginTop="@dimen/_80sdp"
-            android:src="@drawable/ic_w1"
+            loadImageRec="@{welcome.image}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

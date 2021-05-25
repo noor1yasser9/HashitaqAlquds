@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <Spinner
-                android:id="@+id/listCategories"
+                android:id="@+id/listHash"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
@@ -69,11 +69,12 @@
                 app:boxStrokeColor="@color/input_box_tint"
                 app:hintEnabled="false"
                 app:hintTextColor="@color/textColor"
-                app:layout_constraintEnd_toEndOf="@+id/listCategories"
-                app:layout_constraintStart_toStartOf="@+id/listCategories"
-                app:layout_constraintTop_toBottomOf="@+id/listCategories">
+                app:layout_constraintEnd_toEndOf="@+id/listHash"
+                app:layout_constraintStart_toStartOf="@+id/listHash"
+                app:layout_constraintTop_toBottomOf="@+id/listHash">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtContent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -87,7 +88,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/btnImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_16sdp"
@@ -96,24 +97,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/btnVideo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:src="@drawable/ic_video"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                app:layout_constraintStart_toEndOf="@+id/btnImage"
+                app:layout_constraintTop_toTopOf="@+id/btnImage" />
 
             <ImageView
+                android:id="@+id/btnAddFile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:src="@drawable/ic_file"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                app:layout_constraintStart_toEndOf="@+id/btnVideo"
+                app:layout_constraintTop_toTopOf="@+id/btnVideo" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSignIn"
+                android:id="@+id/btnShare"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginVertical="@dimen/_24sdp"
@@ -124,7 +126,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/btnVideo"
                 app:layout_constraintWidth_percent="0.9" />
 
             <View
@@ -132,9 +134,9 @@
                 android:layout_height="@dimen/_70sdp"
                 android:layout_marginVertical="@dimen/_16sdp"
                 android:background="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="@+id/btnSignIn"
-                app:layout_constraintStart_toStartOf="@+id/btnSignIn"
-                app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+                app:layout_constraintEnd_toEndOf="@+id/btnShare"
+                app:layout_constraintStart_toStartOf="@+id/btnShare"
+                app:layout_constraintTop_toBottomOf="@+id/btnShare" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
