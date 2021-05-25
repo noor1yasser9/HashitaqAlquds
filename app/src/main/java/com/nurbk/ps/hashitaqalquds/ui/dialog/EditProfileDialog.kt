@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.nurbk.ps.hashitaqalquds.databinding.DialogAddPostBinding
 import com.nurbk.ps.hashitaqalquds.databinding.DialogEditProfileBinding
 
-class EditProfileDialog : BottomSheetDialogFragment() {
+class EditProfileDialog :BottomSheetDialogFragment(){
     private val mBinding by lazy {
         DialogEditProfileBinding.inflate(layoutInflater)
     }

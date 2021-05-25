@@ -126,4 +126,7 @@ dependencies {
     //video
     implementation 'fm.jiecao:jiecaovideoplayer:5.7'
 
+    //wang.avi
+    implementation 'com.wang.avi:library:2.1.3'
+
 }
