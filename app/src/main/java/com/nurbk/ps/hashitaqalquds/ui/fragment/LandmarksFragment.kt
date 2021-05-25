@@ -29,6 +29,8 @@ class LandmarksFragment : Fragment() {
             title = getString(R.string.landmark),
             isMane = true,
             idMenu = R.drawable.ic_add
-        ){}
+        ){
+
+        }
     }
 }

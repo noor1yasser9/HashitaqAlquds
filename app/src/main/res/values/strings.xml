@@ -32,6 +32,12 @@
     <string name="comment">تعليق</string>
 
 
+    <string name="editProfile">تعديل الملف الشخصي</string>
+    <string name="theme">تغيرات سمات التطبيق</string>
+    <string name="aboutApp">حول التطبيق</string>
+    <string name="logOut">تسجل خروج</string>
+
+
     <string-array name="data">
         <item>اختر هشتاق</item>
         <item>اختر هشتاق</item>

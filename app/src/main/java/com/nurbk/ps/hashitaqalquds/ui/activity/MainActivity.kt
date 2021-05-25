@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             mBinding.bottomNavigation,
             navController
         )
-var id= 0
+        var id = 0
         mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.profileFragment -> {
@@ -50,15 +50,15 @@ var id= 0
                 }
                 R.id.homeFragment -> {
                     if (item.itemId != id)
-                    navController.navigate(R.id.homeFragment, null, getNavOptions())
+                        navController.navigate(R.id.homeFragment, null, getNavOptions())
                 }
                 R.id.mapFragment -> {
                     if (item.itemId != id)
-                    navController.navigate(R.id.mapFragment, null, getNavOptions())
+                        navController.navigate(R.id.mapFragment, null, getNavOptions())
                 }
 
             }
-            id=item.itemId
+            id = item.itemId
             true
         }
 
@@ -71,7 +71,7 @@ var id= 0
                             addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                         }
                     }
-                    R.id.homeFragment, R.id.mapFragment, R.id.profileFragment -> {
+                    R.id.homeFragment, R.id.mapFragment, R.id.profileFragment, R.id.landmarksFragment -> {
                         window.apply {
                             clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                         }

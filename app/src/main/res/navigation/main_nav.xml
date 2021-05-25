@@ -46,9 +46,9 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_down"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_down"
-            app:launchSingleTop="true"
             app:popUpTo="@+id/main_nav"
             app:popUpToInclusive="true" />
         <action
@@ -57,38 +57,44 @@
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_down"/>
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_dialogAddPost"
             app:destination="@id/dialogAddPost"
             app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
-            app:popExitAnim="@anim/slide_down"
-            />
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.MapFragment"
-        android:label="MapFragment" />
+        android:label="MapFragment">
+        <action
+            android:id="@+id/action_mapFragment_to_landmarksFragment"
+            app:destination="@id/landmarksFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_settingFragment"
             app:destination="@id/settingFragment"
             app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
-            app:popExitAnim="@anim/slide_down"
-            />
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -101,7 +107,16 @@
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.SettingFragment"
-        android:label="SettingFragment" />
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_editProfileDialog"
+            app:destination="@id/editProfileDialog"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            />
+    </fragment>
     <fragment
         android:id="@+id/landmarkDetailsFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarkDetailsFragment"
@@ -110,5 +125,9 @@
         android:id="@+id/landmarksFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarksFragment"
         android:label="LandmarksFragment" />
+    <fragment
+        android:id="@+id/editProfileDialog"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.EditProfileDialog"
+        android:label="EditProfileDialog" />
 
 </navigation>

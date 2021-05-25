@@ -56,7 +56,7 @@ class GenericAdapter<T>(
         holder.itemView.apply {
 
             setOnClickListener {
-                itemclick.onClickItem(itemViewModel,1)
+                itemclick.onClickItem(itemViewModel, 1, position)
             }
         }
     }
@@ -84,7 +84,7 @@ class GenericAdapter<T>(
     }
 
     interface OnListItemViewClickListener<T> {
-        fun onClickItem(itemViewModel: T, type: Int)
+        fun onClickItem(itemViewModel: T, type: Int, position: Int)
     }
 
 }

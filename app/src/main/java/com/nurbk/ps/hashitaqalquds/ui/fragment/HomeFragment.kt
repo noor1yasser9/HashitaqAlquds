@@ -51,7 +51,7 @@ class HomeFragment : Fragment() ,GenericAdapter.OnListItemViewClickListener<Welc
 
     }
 
-    override fun onClickItem(itemViewModel: Welcome, type: Int) {
+    override fun onClickItem(itemViewModel: Welcome, type: Int, position: Int) {
 
     }
 }

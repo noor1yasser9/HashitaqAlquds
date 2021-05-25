@@ -6,17 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
+import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentProfileBinding
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentSettingBinding
-import com.nurbk.ps.hashitaqalquds.other.TWO
-import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.model.Settings
+import com.nurbk.ps.hashitaqalquds.model.getData
+import com.nurbk.ps.hashitaqalquds.model.getDataStings
+import com.nurbk.ps.hashitaqalquds.other.*
 
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Settings> {
 
     private val mBinding by lazy {
         FragmentSettingBinding.inflate(layoutInflater)
     }
+    private val mAdapter by lazy {
+        GenericAdapter(R.layout.item_setting, BR.setting, this)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +43,29 @@ class SettingFragment : Fragment() {
         ) {
             if (it == TWO)
                 findNavController().popBackStack()
+        }
+
+        mAdapter.submitList(getDataStings(requireContext()))
+
+        mBinding.rcSetting.apply {
+            adapter = mAdapter
+        }
+    }
+
+    override fun onClickItem(itemViewModel: Settings, type: Int, position: Int) {
+        when (position) {
+            ZERO -> {
+                findNavController().navigate(R.id.action_settingFragment_to_editProfileDialog)
+            }
+            ONE -> {
+
+            }
+            TWO -> {
+
+            }
+            THREE -> {
+
+            }
         }
     }
 
