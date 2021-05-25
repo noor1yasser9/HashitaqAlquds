@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentSplashBinding
+import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
 import com.nurbk.ps.hashitaqalquds.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -47,7 +45,11 @@ class SplashFragment : Fragment() {
                 observe(requireActivity(), {
                     when (it) {
                         is SplashViewModel.SplashState.SplashFragment -> {
-                            findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+                            if (PreferencesManager(requireContext()).isLogin) {
+                                Navigation.findNavController(requireView())
+                                    .navigate(R.id.action_splashFragment_to_homeFragment)
+                            } else
+                                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
                         }
                     }
                 })
