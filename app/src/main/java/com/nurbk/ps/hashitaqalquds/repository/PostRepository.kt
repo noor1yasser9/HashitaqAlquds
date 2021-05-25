@@ -1,10 +1,17 @@
 package com.nurbk.ps.hashitaqalquds.repository
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.nurbk.ps.hashitaqalquds.model.Post
 import com.nurbk.ps.hashitaqalquds.other.COLLECTION_POST
 import com.nurbk.ps.hashitaqalquds.util.Result
+import java.lang.Exception
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,10 +37,10 @@ class PostRepository @Inject constructor() {
 
     fun insert(post: Post) {
         insertPostLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).add(post).addOnFailureListener {
+        db.collection(COLLECTION_POST).document(post.id).set(post).addOnFailureListener {
             insertPostLiveData.postValue(Result.error(it.message, ""))
         }.addOnSuccessListener {
-            insertPostLiveData.postValue(Result.success(it))
+            insertPostLiveData.postValue(Result.success(""))
         }
 
     }
@@ -126,6 +133,51 @@ class PostRepository @Inject constructor() {
             getCommentsLiveData.postValue(Result.success(array))
         }
     }
+
+
+    fun uploadImage(
+        selectedImageBytes: ByteArray,
+        onSuccess: (imagePath: String) -> Unit
+    ) {
+        val ref = FirebaseStorage.getInstance().reference
+            .child(FirebaseAuth.getInstance().currentUser?.uid!!)
+            .child(Calendar.getInstance().time.toString())
+        ref.putBytes(selectedImageBytes)
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener {
+                    onSuccess(it.toString())
+                }
+            }.addOnFailureListener {
+
+            }
+    }
+
+
+    fun uploadVideo(
+        uri: Uri, type: String,
+        onSuccess: (videoPath: String) -> Unit, onFailure: (expception: Exception) -> Unit
+    ) {
+
+        val firebaseStorage = FirebaseStorage.getInstance()
+        val videoReference = firebaseStorage.reference.child("video")
+        val uploadTask: UploadTask = videoReference
+            .child(uri.lastPathSegment + ".$type")
+            .putFile(uri)
+
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.addOnFailureListener { exception ->
+            onFailure(exception)
+        }.addOnSuccessListener { success: UploadTask.TaskSnapshot ->
+            val audioUrl =
+                success.storage.downloadUrl
+            audioUrl.addOnCompleteListener { path: Task<Uri> ->
+                if (path.isSuccessful) {
+                    onSuccess(path.result.toString())
+                }
+            }
+        }
+    }
+
 
     //post getting live data
     val insertPostGetLiveData get() = insertPostLiveData
