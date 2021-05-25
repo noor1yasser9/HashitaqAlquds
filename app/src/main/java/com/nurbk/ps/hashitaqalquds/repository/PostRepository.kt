@@ -2,8 +2,11 @@ package com.nurbk.ps.hashitaqalquds.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nurbk.ps.hashitaqalquds.model.Post
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PostRepository private constructor() {
+@Singleton
+class PostRepository @Inject constructor() {
 
     private val db by lazy {
         FirebaseFirestore.getInstance()
@@ -30,18 +33,5 @@ class PostRepository private constructor() {
     fun getComments(postId: String) =
         db.collection("posts").document(postId).collection("comments").get()
 
-    companion object {
-        @Volatile
-        private var instance: PostRepository? = null
-        private val LOCK = Any()
 
-        operator fun invoke() =
-            instance ?: synchronized(LOCK) {
-                instance ?: createPostRepository().also {
-                    instance = it
-                }
-            }
-
-        private fun createPostRepository() = PostRepository()
-    }
 }
