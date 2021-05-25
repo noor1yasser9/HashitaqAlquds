@@ -10,8 +10,16 @@ import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentHomeBinding
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentSignUpBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
+
+
+    @Inject
+    lateinit var viewMode: AuthViewModel
 
     private val mBinding by lazy {
         FragmentSignUpBinding.inflate(layoutInflater)

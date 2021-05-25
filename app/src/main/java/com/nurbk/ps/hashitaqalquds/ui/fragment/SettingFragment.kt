@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
@@ -64,7 +65,7 @@ class SettingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<S
 
             }
             THREE -> {
-
+                FirebaseAuth.getInstance().signOut()
             }
         }
     }
