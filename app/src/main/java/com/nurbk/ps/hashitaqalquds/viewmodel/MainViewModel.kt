@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.nurbk.ps.hashitaqalquds.model.Post
+import com.nurbk.ps.hashitaqalquds.model.User
 import com.nurbk.ps.hashitaqalquds.other.Result
 import com.nurbk.ps.hashitaqalquds.repository.PostRepository
 import com.nurbk.ps.hashitaqalquds.repository.UserRepository
@@ -12,6 +13,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val userRepository = UserRepository()
     private val postRepository = PostRepository()
 
+    //post live data
     private val insertPostLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val updatePostLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val deletePostLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
@@ -22,6 +24,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val getCommentsLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val getAllPostsLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
 
+    //user live data
+    private val insertUserLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+    private val updateUserLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+    private val deleteUserLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+    private val getUserWhereIdLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+    private val signUpLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+    private val signInLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+
+    //post function
     fun insert(post: Post) {
         insertPostLiveData.postValue(Result.loading(""))
         postRepository.insert(post).addOnFailureListener {
@@ -121,6 +132,67 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
+    // user functions
+    fun insert(user: User) {
+        insertUserLiveData.postValue(Result.loading(""))
+        userRepository.insert(user).addOnFailureListener {
+            insertUserLiveData.postValue(Result.error(it.message, ""))
+        }.addOnSuccessListener {
+            insertUserLiveData.postValue(Result.success(it))
+        }
+
+    }
+
+    fun updateUser(userId: String, user: Map<String, Any>) {
+        updateUserLiveData.postValue(Result.loading(""))
+        userRepository.update(userId, user).addOnFailureListener {
+            updateUserLiveData.postValue(Result.error(it.message, ""))
+        }.addOnSuccessListener {
+            updateUserLiveData.postValue(Result.success(it))
+        }
+    }
+
+    fun deleteUser(userId: String) {
+        deleteUserLiveData.postValue(Result.loading(""))
+        userRepository.delete(userId).addOnFailureListener {
+            deleteUserLiveData.postValue(Result.error(it.message, ""))
+        }.addOnSuccessListener {
+            deleteUserLiveData.postValue(Result.success(it))
+        }
+
+    }
+
+    fun getUserWhereId(userId: String) {
+        getUserWhereIdLiveData.postValue(Result.loading(""))
+        userRepository.getWhereId(userId).addOnFailureListener {
+            getUserWhereIdLiveData.postValue(Result.error(it.message, ""))
+        }.addOnSuccessListener {
+            getUserWhereIdLiveData.postValue(Result.success(it.toObject(Post::class.java)!!))
+        }
+
+    }
+
+    fun signUp(email: String, pass: String, user: User) {
+        signUpLiveData.postValue(Result.loading(""))
+        userRepository.signUp(email, pass).addOnFailureListener {
+            signUpLiveData.postValue(Result.error(it.message, ""))
+        }.addOnSuccessListener {
+            insert(user)
+            signUpLiveData.postValue(Result.success(""))
+        }
+
+    }
+
+    fun signIn(email: String, pass: String) {
+        signInLiveData.postValue(Result.loading(""))
+        userRepository.signIn(email, pass).addOnFailureListener {
+            signInLiveData.postValue(Result.error(it.message, ""))
+        }.addOnSuccessListener {
+            signInLiveData.postValue(Result.success(""))
+        }
+    }
+
+    //post getting live data
     val insertPostGetLiveData get() = insertPostLiveData
     val updatePostGetLiveData get() = updatePostLiveData
     val deletePostGetLiveData get() = deletePostLiveData
@@ -131,5 +203,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val getLikesGetLiveData get() = getLikesLiveData
     val getCommentsGetLiveData get() = getCommentsLiveData
 
+    //user getting live data
+    val insertUserGetLiveData get() = insertUserLiveData
+    val updateUserGetLiveData get() = updateUserLiveData
+    val deleteUserGetLiveData get() = deleteUserLiveData
+    val getUserWhereIdGetLiveData get() = getUserWhereIdLiveData
+    val signUpGetLiveData get() = signUpLiveData
+    val signInGetLiveData get() = signInLiveData
 
 }
