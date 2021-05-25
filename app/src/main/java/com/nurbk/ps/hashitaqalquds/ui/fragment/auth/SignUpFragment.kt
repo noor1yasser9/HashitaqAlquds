@@ -52,7 +52,7 @@ class SignUpFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        mBinding.btnSignIn.setOnClickListener {
+        mBinding.btnSignUp.setOnClickListener {
             createAccount()
         }
 

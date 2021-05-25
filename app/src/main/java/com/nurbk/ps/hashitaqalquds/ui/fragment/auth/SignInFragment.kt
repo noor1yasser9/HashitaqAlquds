@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentSignInBinding
+import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,9 +27,7 @@ class SignInFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: AuthViewModel
-    private val dialog by lazy {
-        Dialog(requireContext())
-    }
+    private lateinit var loadingDialog: LoadingDialog
 
     private val mBinding by lazy {
         FragmentSignInBinding.inflate(layoutInflater)
@@ -43,21 +42,21 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createDialog()
+        loadingDialog = LoadingDialog()
 
         viewModel.signInGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
                 }
                 Result.Status.ERROR -> {
-                    dialog.dismiss()
+                    loadingDialog.dismiss()
                 }
                 Result.Status.LOADING -> {
-                    if (!dialog.isShowing)
-                        dialog.show()
+                    if (!loadingDialog.isAdded)
+                        loadingDialog.show(requireActivity().supportFragmentManager, "")
                 }
                 Result.Status.SUCCESS -> {
-                    dialog.dismiss()
+                    loadingDialog.dismiss()
                     findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
                 }
             }
@@ -95,11 +94,5 @@ class SignInFragment : Fragment() {
 
     }
 
-    private fun createDialog() {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.dialog_loading)
-
-    }
 
 }
