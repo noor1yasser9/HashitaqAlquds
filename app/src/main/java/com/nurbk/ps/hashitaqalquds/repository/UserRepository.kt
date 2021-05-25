@@ -28,9 +28,9 @@ class UserRepository @Inject constructor() {
     }
 
     fun update(id: String, user: Map<String, Any>) =
-        db.collection("users").document(id).update(user)
+        db.collection(COLLECTION_USERS).document(id).update(user)
 
-    fun getWhereId(id: String) = db.collection("users").document(id).get()
+    fun getWhereId(id: String) = db.collection(COLLECTION_USERS).document(id).get()
 
 
     private val signUpLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()

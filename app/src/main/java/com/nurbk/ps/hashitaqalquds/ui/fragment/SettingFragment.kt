@@ -16,8 +16,13 @@ import com.nurbk.ps.hashitaqalquds.model.Settings
 import com.nurbk.ps.hashitaqalquds.model.getData
 import com.nurbk.ps.hashitaqalquds.model.getDataStings
 import com.nurbk.ps.hashitaqalquds.other.*
+import com.nurbk.ps.hashitaqalquds.viewmodel.ProfileViewModel
+import javax.inject.Inject
 
 class SettingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Settings> {
+
+    @Inject
+    lateinit var viewModel: ProfileViewModel
 
     private val mBinding by lazy {
         FragmentSettingBinding.inflate(layoutInflater)

@@ -9,10 +9,15 @@ import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentProfileBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.MapViewModel
+import com.nurbk.ps.hashitaqalquds.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
+    @Inject
+    lateinit var viewModel: ProfileViewModel
 
     private val mBinding by lazy {
         FragmentProfileBinding.inflate(layoutInflater)

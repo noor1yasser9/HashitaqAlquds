@@ -21,10 +21,16 @@ import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentHomeBinding
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentMapBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
+import com.nurbk.ps.hashitaqalquds.viewmodel.MapViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+
+    @Inject
+    lateinit var viewModel: MapViewModel
 
     private val mBinding by lazy {
         FragmentMapBinding.inflate(layoutInflater)

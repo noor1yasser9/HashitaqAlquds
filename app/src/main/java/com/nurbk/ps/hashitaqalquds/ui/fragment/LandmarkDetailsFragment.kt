@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarksBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
+import javax.inject.Inject
 
 
 class LandmarkDetailsFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModel: LandmarkViewModel
 
     private val mBinding by lazy{
         FragmentLandmarksBinding.inflate(layoutInflater)

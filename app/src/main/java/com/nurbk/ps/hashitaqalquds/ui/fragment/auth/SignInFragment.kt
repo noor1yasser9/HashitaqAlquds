@@ -9,8 +9,14 @@ import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentSignInBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.AuthViewModel
+import javax.inject.Inject
 
 class SignInFragment : Fragment() {
+
+    @Inject
+    lateinit var viewMode: AuthViewModel
+
 
     private val mBinding by lazy {
         FragmentSignInBinding.inflate(layoutInflater)

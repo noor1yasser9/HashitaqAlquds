@@ -13,10 +13,16 @@ import com.nurbk.ps.hashitaqalquds.databinding.FragmentHomeBinding
 import com.nurbk.ps.hashitaqalquds.model.Welcome
 import com.nurbk.ps.hashitaqalquds.model.getData
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() ,GenericAdapter.OnListItemViewClickListener<Welcome> {
+class HomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Welcome> {
+
+
+    @Inject
+    lateinit var viewModel: HomeViewModel
     private val mBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
     }

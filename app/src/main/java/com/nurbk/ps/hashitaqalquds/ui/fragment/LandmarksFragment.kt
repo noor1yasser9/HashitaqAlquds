@@ -9,11 +9,16 @@ import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarkDetailsBinding
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarksBinding
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
+import javax.inject.Inject
 
 
 class LandmarksFragment : Fragment() {
 
-    private val mBinding by lazy{
+    @Inject
+    lateinit var viewModel: LandmarkViewModel
+
+    private val mBinding by lazy {
         FragmentLandmarkDetailsBinding.inflate(layoutInflater)
     }
 
@@ -29,7 +34,7 @@ class LandmarksFragment : Fragment() {
             title = getString(R.string.landmark),
             isMane = true,
             idMenu = R.drawable.ic_add
-        ){
+        ) {
 
         }
     }
