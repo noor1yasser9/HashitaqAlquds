@@ -65,7 +65,12 @@ class UserRepository @Inject constructor() {
             .addOnSuccessListener { su: AuthResult? ->
                 users.id = (FirebaseAuth.getInstance().uid).toString()
                 insert(users)
-            }.addOnFailureListener { ex: java.lang.Exception? -> handelExp(ex!!) }
+            }.addOnFailureListener { ex: java.lang.Exception? ->
+//                handelExp(ex!!)
+                Log.e("ttttttt", ex!!.message!!)
+                signUpLiveData.postValue(Result.error("", ex))
+
+            }
     }
 
     private fun insert(user: User) {

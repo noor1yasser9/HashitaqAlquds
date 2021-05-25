@@ -26,7 +26,9 @@ class SignInFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: AuthViewModel
-    private val dialog = Dialog(requireContext())
+    private val dialog by lazy {
+        Dialog(requireContext())
+    }
 
     private val mBinding by lazy {
         FragmentSignInBinding.inflate(layoutInflater)
@@ -40,8 +42,9 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         createDialog()
-        validate()
+
         viewModel.signInGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
@@ -50,16 +53,18 @@ class SignInFragment : Fragment() {
                     dialog.dismiss()
                 }
                 Result.Status.LOADING -> {
-                    dialog.show()
+                    if (!dialog.isShowing)
+                        dialog.show()
                 }
                 Result.Status.SUCCESS -> {
                     dialog.dismiss()
+                    findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
                 }
             }
 
         }
         mBinding.btnSignIn.setOnClickListener {
-            findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
+            validate()
         }
 
         mBinding.createSignUp.setOnClickListener {
@@ -68,7 +73,7 @@ class SignInFragment : Fragment() {
 
     }
 
-    fun validate() {
+    private fun validate() {
         val email: String = mBinding.txtEmail.editText!!.text.toString()
         val password: String = mBinding.txtPassword.editText!!.text.toString()
         if (TextUtils.isEmpty(email)) {
@@ -89,6 +94,7 @@ class SignInFragment : Fragment() {
         editText.requestFocus()
 
     }
+
     private fun createDialog() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)

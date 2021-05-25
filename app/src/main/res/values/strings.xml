@@ -33,6 +33,7 @@
     <string name="field_required">الحقل مطلوب</string>
     <string name="error_email">الرجاء ادخال بريد الكتورني صالح</string>
     <string name="password_error">كلمة المرور ضعيفة</string>
+    <string name="error_phone">الرجاء ادخال رقم هاتف صالح</string>
 
     <string name="editProfile">تعديل الملف الشخصي</string>
     <string name="theme">تغيرات سمات التطبيق</string>

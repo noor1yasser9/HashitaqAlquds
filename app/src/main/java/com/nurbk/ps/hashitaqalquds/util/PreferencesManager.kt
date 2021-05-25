@@ -9,7 +9,7 @@ import com.nurbk.ps.hashitaqalquds.other.PREFERENCES_NAME
 import com.nurbk.ps.hashitaqalquds.other.USER_PROFILE
 
 class PreferencesManager(private val mContext: Context) {
-    val sharedPreferences: SharedPreferences =
+    private val sharedPreferences: SharedPreferences =
         mContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
     val editor: SharedPreferences.Editor = sharedPreferences.edit()
     val user: User
