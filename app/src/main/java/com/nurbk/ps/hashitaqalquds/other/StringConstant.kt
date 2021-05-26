@@ -18,6 +18,11 @@ const val VIDEO_TYPE = 1
 const val PDF_TYPE = 2
 const val CONTENT_TYPE = 4
 
+const val ACTION_COMMENT = 1
+const val ACTION_LIKE = 2
+const val ACTION_PROFILE = 3
+const val ACTION_MORE = 4
+
 const val REQUEST_IMAGE_CODE = 1
 const val REQUEST_VIDEO_CODE = 2
 const val REQUEST_FILE_CODE = 3

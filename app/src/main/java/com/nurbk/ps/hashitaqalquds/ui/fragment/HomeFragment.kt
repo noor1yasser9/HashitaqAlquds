@@ -10,11 +10,12 @@ import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
+import com.nurbk.ps.hashitaqalquds.adapter.PostAdapter
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentHomeBinding
 import com.nurbk.ps.hashitaqalquds.model.Post
 import com.nurbk.ps.hashitaqalquds.model.Welcome
 import com.nurbk.ps.hashitaqalquds.model.getData
-import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
@@ -22,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Post> {
+class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
 
 
     @Inject
@@ -33,9 +34,9 @@ class HomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Post
         FragmentHomeBinding.inflate(layoutInflater)
     }
 
-    private val mAdapter by lazy {
-        GenericAdapter(R.layout.item_post_image, BR.post, this)
-    }
+    @Inject
+    lateinit var mAdapter: PostAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +47,7 @@ class HomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Post
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadingDialog = LoadingDialog()
+        mAdapter.onClick = this
 
         requireActivity().setToolbarView(
             mBinding.toolbarView,
@@ -76,16 +78,25 @@ class HomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Post
                 Result.Status.SUCCESS -> {
                     try {
                         loadingDialog.dismiss()
-                    } catch (e: Exception){}
+                    } catch (e: Exception) {
+                    }
                     val data = it.data as ArrayList<Post>
-                    Log.e("tttttttt", data.toString() + "ttttttt")
                     mAdapter.data = data
                 }
             }
         }
     }
 
-    override fun onClickItem(itemViewModel: Post, type: Int, position: Int) {
-
+    override fun onClickItem(post: Post, type: Int) {
+        when (type) {
+            ACTION_PROFILE -> {
+            }
+            ACTION_MORE -> {
+            }
+            ACTION_COMMENT -> {
+            }
+            ACTION_LIKE -> {
+            }
+        }
     }
 }

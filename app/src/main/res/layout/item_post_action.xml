@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialButton"
+                android:id="@+id/btnLike"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_60sdp"
                 android:backgroundTint="@color/green_900"
@@ -81,7 +81,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialButton8"
+                android:id="@+id/btnComment"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_60sdp"
                 android:backgroundTint="@color/green_900"
