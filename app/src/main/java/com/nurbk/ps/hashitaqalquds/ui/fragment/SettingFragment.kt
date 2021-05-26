@@ -51,7 +51,7 @@ class SettingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<S
                 findNavController().popBackStack()
         }
 
-        mAdapter.submitList(getDataStings(requireContext()))
+        mAdapter.data = (getDataStings(requireContext()))
 
         mBinding.rcSetting.apply {
             adapter = mAdapter

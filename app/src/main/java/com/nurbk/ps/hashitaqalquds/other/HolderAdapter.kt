@@ -2,9 +2,13 @@ package com.nurbk.ps.hashitaqalquds.other
 
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
+import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.nurbk.ps.hashitaqalquds.R
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
 
 
 object HolderAdapter {
@@ -15,6 +19,35 @@ object HolderAdapter {
     fun loadImage(image: ImageView, img: Int) {
         try {
             image.setImageResource(img)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("uriImage")
+    fun uriImage(image: ImageView, img: String) {
+        try {
+            Glide
+                .with(image.context)
+                .load(img)
+                .centerCrop()
+                .into(image)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("uriVideo")
+    fun uriVideo(videoPlayer: JCVideoPlayerStandard, uri: String) {
+        try {
+            videoPlayer.setUp(
+                uri,
+                JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,
+                uri
+            )
         } catch (e: Exception) {
             e.printStackTrace()
         }

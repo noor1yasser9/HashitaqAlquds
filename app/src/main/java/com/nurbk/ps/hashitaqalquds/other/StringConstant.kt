@@ -13,6 +13,11 @@ const val EIGHT = 8
 const val NINE = 9
 const val TEN = 10
 
+const val PHOTO_TYPE = 0
+const val VIDEO_TYPE = 1
+const val PDF_TYPE = 2
+const val CONTENT_TYPE = 4
+
 const val REQUEST_IMAGE_CODE = 1
 const val REQUEST_VIDEO_CODE = 2
 const val REQUEST_FILE_CODE = 3

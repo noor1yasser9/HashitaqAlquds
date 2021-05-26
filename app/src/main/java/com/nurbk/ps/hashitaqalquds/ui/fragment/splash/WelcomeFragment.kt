@@ -36,7 +36,7 @@ class WelcomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<W
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAdapter.submitList(getData(requireContext()))
+        mAdapter.data = (getData(requireContext()))
 
         mBinding.vpWelcome.apply {
             adapter = mAdapter

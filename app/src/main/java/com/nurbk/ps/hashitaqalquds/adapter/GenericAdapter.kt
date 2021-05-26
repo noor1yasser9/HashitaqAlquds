@@ -16,15 +16,57 @@ class GenericAdapter<T>(
     val itemclick: OnListItemViewClickListener<T>
 ) :
     RecyclerView.Adapter<GenericAdapter.GenericViewHolder<T>>() {
+    // var inflater: LayoutInflater? = null
 
-    private var onAttach = true
-    val data = ArrayList<T>()
-    private var inflater: LayoutInflater? = null
 
-    fun addItems(items: List<T>) {
-        this.data.clear()
-        this.data.addAll(items)
-        notifyDataSetChanged()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
+        val binding =
+            DataBindingUtil.inflate<ViewDataBinding>(
+                LayoutInflater.from(parent.context),
+                layoutId,
+                parent,
+                false
+            )
+
+        return GenericViewHolder(binding)
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
+        try {
+            val itemViewModel = data[position]
+            holder.bind(itemViewModel, type)
+            holder.itemView.apply {
+                setOnClickListener {
+                    itemclick.onClickItem(itemViewModel, 1, position)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+    }
+
+
+    class GenericViewHolder<T>(private val binding: ViewDataBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(itemViewModel: T, F: Int) {
+            try {
+                binding.setVariable(F, itemViewModel)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+    }
+
+
+    interface OnListItemViewClickListener<T> {
+        fun onClickItem(itemViewModel: T, type: Int, position: Int)
     }
 
     val diffCallback = object : DiffUtil.ItemCallback<T>() {
@@ -36,55 +78,11 @@ class GenericAdapter<T>(
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
-
     val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitList(list: List<T>) = differ.submitList(list)
+    var data: List<T>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
-        val layoutInflater = inflater ?: LayoutInflater.from(parent.context)
-        val binding =
-            DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, layoutId, parent, false)
-        return GenericViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int = differ.currentList.size
-
-    override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
-        val itemViewModel = differ.currentList[position]
-        holder.bind(itemViewModel, type)
-        holder.itemView.apply {
-
-            setOnClickListener {
-                itemclick.onClickItem(itemViewModel, 1, position)
-            }
-        }
-    }
-
-
-    class GenericViewHolder<T>(private val binding: ViewDataBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(itemViewModel: T, F: Int) {
-            binding.setVariable(F, itemViewModel)
-            binding.executePendingBindings()
-        }
-
-    }
-
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                onAttach = false
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
-        super.onAttachedToRecyclerView(recyclerView)
-    }
-
-    interface OnListItemViewClickListener<T> {
-        fun onClickItem(itemViewModel: T, type: Int, position: Int)
-    }
 
 }

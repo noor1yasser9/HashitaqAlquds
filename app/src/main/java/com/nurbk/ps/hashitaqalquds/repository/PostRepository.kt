@@ -14,6 +14,7 @@ import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.collections.ArrayList
 
 @Singleton
 class PostRepository @Inject constructor() {
@@ -89,12 +90,16 @@ class PostRepository @Inject constructor() {
 
     fun getAllPosts() {
         getAllPostsLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).get().addOnFailureListener {
-            getAllPostsLiveData.postValue(Result.error(it.message, ""))
-        }.addOnSuccessListener {
-            val array = arrayListOf<Post>()
-            it.forEach { p -> array.add(p.toObject(Post::class.java)) }
-            getAllPostsLiveData.postValue(Result.success(array))
+        db.collection(COLLECTION_POST).addSnapshotListener { value, error ->
+            if (error == null) {
+                val array = ArrayList<Post>()
+                value?.let {
+                  it.forEach { p -> array.add(p.toObject(Post::class.java)) }
+                }
+                getAllPostsLiveData.postValue(Result.success(array))
+            } else {
+                getAllPostsLiveData.postValue(Result.error(error.message, ""))
+            }
         }
     }
 
@@ -114,24 +119,25 @@ class PostRepository @Inject constructor() {
         getLikesLiveData.postValue(Result.loading(""))
         db.collection(COLLECTION_POST).document(postId).collection("likes").get()
             .addOnFailureListener {
-            getLikesLiveData.postValue(Result.error(it.message, ""))
-        }.addOnSuccessListener {
-            // val array = arrayListOf<Post>()
-            //it.forEach { p-> array.add(p.toObject(Post::class.java)) }
-            //   getLikesLiveData.postValue(Result.success(array))
-        }
+                getLikesLiveData.postValue(Result.error(it.message, ""))
+            }.addOnSuccessListener {
+                // val array = arrayListOf<Post>()
+                //it.forEach { p-> array.add(p.toObject(Post::class.java)) }
+                //   getLikesLiveData.postValue(Result.success(array))
+            }
 
     }
 
     fun getComments(postId: String) {
         getCommentsLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).document(postId).collection("comments").get().addOnFailureListener {
-            getCommentsLiveData.postValue(Result.error(it.message, ""))
-        }.addOnSuccessListener {
-            val array = arrayListOf<Post>()
-            it.forEach { p -> array.add(p.toObject(Post::class.java)) }
-            getCommentsLiveData.postValue(Result.success(array))
-        }
+        db.collection(COLLECTION_POST).document(postId).collection("comments").get()
+            .addOnFailureListener {
+                getCommentsLiveData.postValue(Result.error(it.message, ""))
+            }.addOnSuccessListener {
+                val array = arrayListOf<Post>()
+                it.forEach { p -> array.add(p.toObject(Post::class.java)) }
+                getCommentsLiveData.postValue(Result.success(array))
+            }
     }
 
 
@@ -190,5 +196,9 @@ class PostRepository @Inject constructor() {
     val getLikesGetLiveData get() = getLikesLiveData
     val getCommentsGetLiveData get() = getCommentsLiveData
 
+
+    init {
+        getAllPosts()
+    }
 
 }

@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="post"
+            type="com.nurbk.ps.hashitaqalquds.model.Post" />
+
+        <import type="com.nurbk.ps.hashitaqalquds.other.StringConstantKt" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -18,35 +25,44 @@
             layout="@layout/item_post_h"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:post="@{post}" />
+
 
         <ImageView
             android:id="@+id/imageView7"
+            uriImage="@{post.media}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:elevation="@dimen/_16sdp"
-            android:src="@drawable/ic_pdf"
+            tools:visibility="gone"
             android:padding="@dimen/_300sdp"
-            android:visibility="gone"
+            android:visibility="@{post.type==StringConstantKt.PHOTO_TYPE?View.VISIBLE:View.GONE}"
             app:layout_constraintTop_toBottomOf="@+id/header" />
+
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
+            tools:visibility="gone"
             android:layout_marginTop="@dimen/_8sdp"
             android:elevation="@dimen/_16sdp"
-            android:src="@drawable/ic_pdf"
             android:padding="@dimen/_30sdp"
+            android:src="@drawable/ic_pdf"
+            android:visibility="@{post.type==StringConstantKt.PDF_TYPE?View.VISIBLE:View.GONE}"
             app:layout_constraintTop_toBottomOf="@+id/header" />
+
         <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
             android:id="@+id/videoplayer"
+            uriVideo="@{post.media}"
             android:layout_width="match_parent"
-            android:visibility="gone"
+            tools:visibility="gone"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:elevation="@dimen/_16sdp"
-            android:src="@color/green_900" />
+            android:src="@color/green_900"
+            android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}" />
 
         <include
             android:id="@+id/action"

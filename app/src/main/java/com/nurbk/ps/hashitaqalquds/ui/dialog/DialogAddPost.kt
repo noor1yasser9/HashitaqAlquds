@@ -41,7 +41,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
         DialogAddPostBinding.inflate(layoutInflater)
     }
 
-    private var type = Post.CONTENT_TYPE
+    private var type = CONTENT_TYPE
 
 
     private val intent by lazy {
@@ -151,12 +151,12 @@ class DialogAddPost : BottomSheetDialogFragment() {
                 tag = hash, content = content, media = media.toString(), type
             )
             when (type) {
-                Post.CONTENT_TYPE -> {
+                CONTENT_TYPE -> {
                     viewMode.insert(
                         post
                     )
                 }
-                Post.PHOTO_TYPE -> {
+              PHOTO_TYPE -> {
                     viewMode.uploadImage(compressFormat(media!!, requireActivity())) {
                         post.media = it
                         viewMode.insert(
@@ -166,7 +166,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
                     }
 
                 }
-                Post.VIDEO_TYPE -> {
+                VIDEO_TYPE -> {
                     viewMode.uploadVideo(media!!, "mp4", {
                         post.media = it
                         viewMode.insert(
@@ -176,7 +176,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
 
                     })
                 }
-                Post.PDF_TYPE -> {
+              PDF_TYPE -> {
                     viewMode.uploadVideo(media!!, "pdf", {
                         post.media = it
                         viewMode.insert(
@@ -198,22 +198,19 @@ class DialogAddPost : BottomSheetDialogFragment() {
         if (requestCode == REQUEST_IMAGE_CODE &&
             resultCode == Activity.RESULT_OK
         ) {
-            type = Post.PHOTO_TYPE
+            type = PHOTO_TYPE
             media = data!!.data!!
         } else if (requestCode == REQUEST_VIDEO_CODE &&
             resultCode == Activity.RESULT_OK
         ) {
-            type = Post.VIDEO_TYPE
+            type = VIDEO_TYPE
             media = data!!.data!!
         }
         else if (requestCode == REQUEST_FILE_CODE &&
             resultCode == Activity.RESULT_OK
         ) {
-            type = Post.PDF_TYPE
+            type =PDF_TYPE
             media = data!!.data!!
-
         }
-
-
     }
 }

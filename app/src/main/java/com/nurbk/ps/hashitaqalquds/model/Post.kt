@@ -7,12 +7,5 @@ data class Post(
     val tag: String = "",
     val content: String = "",
     var media: String = "",
-    val type: Int
-) {
-    companion object {
-        const val PHOTO_TYPE = 0
-        const val VIDEO_TYPE = 1
-        const val PDF_TYPE = 2
-        const val CONTENT_TYPE = 4
-    }
-}
+    val type: Int=0
+)
