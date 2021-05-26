@@ -68,13 +68,7 @@ class ProfileFragment : Fragment() {
                 }
                 Result.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    val user = it.data as User
-                    mBinding.txtName.text = user.name
-                    mBinding.txtEmail.text = user.email
-                    mBinding.txtPhone.text = user.phone
-                    mBinding.txtNote.text = user.bio
-                    uriImage(mBinding.imgProfile, user.image)
-                    Log.e(TAG, user.image)
+                    mBinding.user =  it.data as User
 
                 }
             }
