@@ -68,12 +68,7 @@ class EditProfileDialog : BottomSheetDialogFragment() {
 
                 }
                 Result.Status.SUCCESS -> {
-                     user = it.data as User
-                    mBinding.txtName.editText!!.setText(user.name)
-                    mBinding.txtPhone.editText!!.setText(user.phone)
-                    mBinding.txtNote.editText!!.setText(user.bio)
-                    uriImage(mBinding.imgProfile, user.image)
-                    Log.e(TAG, user.image)
+                     mBinding.user = it.data as User
 
                 }
             }

@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="user"
+            type="com.nurbk.ps.hashitaqalquds.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +25,7 @@
 
             <ImageView
                 android:id="@+id/imgProfile"
+                uriImage="@{user.image}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -48,6 +52,7 @@
                 android:fontFamily="@font/zahra_ln_line_grunge"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
+                android:text="@{user.name}"
                 android:textSize="@dimen/_20ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,6 +76,8 @@
                 android:fontFamily="@font/zahra_ln_line_grunge"
                 android:hint="@string/phoneNumber"
                 android:inputType="phone"
+
+                android:text="@{user.phone}"
                 android:textSize="@dimen/_20ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -92,10 +99,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/zahra_ln_line_grunge"
-                android:hint="@string/note"
                 android:gravity="top"
-                android:lines="3"
+                android:hint="@string/note"
+
                 android:inputType="textMultiLine"
+                android:lines="3"
+                android:text="@{user.bio}"
                 android:textSize="@dimen/_20ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
