@@ -26,7 +26,7 @@ object HolderAdapter {
 
     @JvmStatic
     @BindingAdapter("uriImage")
-    fun uriImage(image: ImageView, img: String) {
+    fun uriImage(image: ImageView, img: String?) {
         try {
             Glide
                 .with(image.context)

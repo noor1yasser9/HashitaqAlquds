@@ -3,6 +3,7 @@ package com.nurbk.ps.hashitaqalquds.ui.dialog
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -157,7 +158,12 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     if (requestCode == REQUEST_IMAGE_CODE &&
         resultCode == Activity.RESULT_OK
     ) {
+
         media = data!!.data!!
+        val  imageStream = requireActivity().contentResolver.openInputStream(media!!)
+        val  selectedImage = BitmapFactory.decodeStream(imageStream)
+        mBinding.imgProfile.setImageBitmap(selectedImage)
+
     }
 }
 }
