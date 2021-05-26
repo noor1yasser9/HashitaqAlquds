@@ -3,21 +3,24 @@ package com.nurbk.ps.hashitaqalquds.other
 import android.app.*
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.nurbk.ps.hashitaqalquds.databinding.ToolbarLayoutBinding
-import kotlinx.android.synthetic.main.toolbar_layout.*
-import java.util.ArrayList
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.nurbk.ps.hashitaqalquds.R
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 fun Activity.setToolbarView(
     view: ToolbarLayoutBinding,
@@ -94,6 +97,19 @@ fun compressFormat(data: Uri, activity: Activity): ByteArray {
         .compress(Bitmap.CompressFormat.JPEG, 20, outputStream)
     return outputStream.toByteArray()
 }
+
+
+fun generateColor(view: View, context: Context) {
+    val rnd = Random()
+    val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+    val shape = ContextCompat.getDrawable(
+        context,
+        R.drawable.bg_letter
+    )
+    shape!!.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY)
+    view.background = shape
+}
+
 
 
 

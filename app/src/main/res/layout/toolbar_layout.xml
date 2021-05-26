@@ -84,7 +84,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/btnMenu"
                             app:layout_constraintStart_toEndOf="@+id/btnBack"
                             app:layout_constraintTop_toTopOf="parent"
-                             />
+                            />
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/btnMenu"

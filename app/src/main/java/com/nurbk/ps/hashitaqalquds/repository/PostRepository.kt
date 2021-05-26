@@ -46,7 +46,6 @@ class PostRepository @Inject constructor() {
         }.addOnSuccessListener {
             insertPostLiveData.postValue(Result.success(""))
         }
-
     }
 
 
@@ -92,7 +91,7 @@ class PostRepository @Inject constructor() {
     }
 
     fun getAllPosts() {
-//        getAllPostsLiveData.postValue(Result.loading(""))
+        getAllPostsLiveData.postValue(Result.loading(""))
         db.collection(COLLECTION_POST).addSnapshotListener { value, error ->
             if (error == null) {
                 val array = ArrayList<Post>()

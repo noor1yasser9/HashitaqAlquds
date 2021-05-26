@@ -31,38 +31,36 @@
 
         <ImageView
             android:id="@+id/imagePost"
-            uriImage="@{post.media}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:elevation="@dimen/_16sdp"
-            tools:visibility="gone"
-            android:padding="@dimen/_300sdp"
-            android:visibility="@{post.type==StringConstantKt.PHOTO_TYPE?View.VISIBLE:View.GONE}"
-            app:layout_constraintTop_toBottomOf="@+id/header" />
+            uriImage="@{post.media}"
+            android:background="@color/black"
+            android:elevation="@dimen/_1sdp"
+            android:visibility="@{post.type==StringConstantKt.PHOTO_TYPE?View.VISIBLE:View.GONE}" />
 
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            tools:visibility="gone"
             android:layout_marginTop="@dimen/_8sdp"
-            android:elevation="@dimen/_16sdp"
+            android:elevation="@dimen/_1sdp"
             android:padding="@dimen/_30sdp"
             android:src="@drawable/ic_pdf"
             android:visibility="@{post.type==StringConstantKt.PDF_TYPE?View.VISIBLE:View.GONE}"
-            app:layout_constraintTop_toBottomOf="@+id/header" />
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            tools:visibility="gone" />
 
         <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
             android:id="@+id/videoplayer"
             uriVideo="@{post.media}"
             android:layout_width="match_parent"
-            tools:visibility="gone"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:elevation="@dimen/_16sdp"
+            android:elevation="@dimen/_1sdp"
             android:src="@color/green_900"
-            android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}" />
+            android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}"
+            tools:visibility="gone" />
 
         <include
             android:id="@+id/action"
