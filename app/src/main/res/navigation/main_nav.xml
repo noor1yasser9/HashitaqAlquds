@@ -114,6 +114,10 @@
         android:id="@+id/dialogAddPost"
         android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.DialogAddPost"
         android:label="DialogAddPost" />
+    <dialog
+        android:id="@+id/editProfileDialog"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.EditProfileDialog"
+        android:label="EditProfileDialog" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.SettingFragment"
@@ -134,8 +138,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_down"
             app:popUpTo="@+id/main_nav"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/landmarkDetailsFragment"
@@ -145,9 +148,6 @@
         android:id="@+id/landmarksFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarksFragment"
         android:label="LandmarksFragment" />
-    <fragment
-        android:id="@+id/editProfileDialog"
-        android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.EditProfileDialog"
-        android:label="EditProfileDialog" />
+
 
 </navigation>

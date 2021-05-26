@@ -8,12 +8,15 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.nurbk.ps.hashitaqalquds.model.User
 import com.nurbk.ps.hashitaqalquds.other.COLLECTION_USERS
 import com.nurbk.ps.hashitaqalquds.util.Result
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 @Singleton
 class UserRepository @Inject constructor() {
@@ -28,13 +31,20 @@ class UserRepository @Inject constructor() {
     }
 
     fun update(id: String, user: Map<String, Any>) =
-        db.collection(COLLECTION_USERS).document(id).update(user)
-
-    fun getWhereId(id: String) = db.collection(COLLECTION_USERS).document(id).get()
-
+        db.collection(COLLECTION_USERS).document(id).update(user).addOnSuccessListener {
+            updateLiveData.postValue(
+                Result.success(it)
+            )
+        }.addOnFailureListener {
+            updateLiveData.postValue(
+                Result.error(it.message,null)
+            )
+        }
 
     private val signUpLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()
     private val signInLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()
+    private val getWhereIdLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()
+    private val updateLiveData: MutableLiveData<Result<Any?>> = MutableLiveData()
 
 
     fun signIn(email: String, pass: String, onComplete: (String) -> Unit) {
@@ -47,17 +57,50 @@ class UserRepository @Inject constructor() {
     }
 
     fun getWhereId(id: String, onComplete: (String) -> Unit) {
+        getWhereIdLiveData.postValue(Result.loading(null))
+
         db.collection(COLLECTION_USERS)
             .document(id)
-            .addSnapshotListener { query: DocumentSnapshot?, s: FirebaseFirestoreException? ->
-                val users: User? = query!!.toObject(User::class.java)
-                val user = Gson().toJson(users)
-                onComplete(user)
-                signInLiveData.postValue(Result.success(user))
+            .addSnapshotListener { query: DocumentSnapshot?, ex: FirebaseFirestoreException? ->
+                if (ex == null) {
+                    val users: User? = query!!.toObject(User::class.java)
+                    val user = Gson().toJson(users)
+                    onComplete(user)
+                    getWhereIdLiveData.postValue(Result.success(users))
+                    signInLiveData.postValue(Result.success(user))
+
+                } else getWhereIdLiveData.postValue(Result.error("", ex))
+            }
+    }
+
+    fun uploadImage(
+        oldPath: String,
+        selectedImageBytes: ByteArray,
+        onSuccess: (imagePath: String) -> Unit
+    ) {
+        val ref = FirebaseStorage.getInstance().reference
+            .child(FirebaseAuth.getInstance().currentUser?.uid!!)
+            .child(Calendar.getInstance().time.toString())
+        ref.putBytes(selectedImageBytes)
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener {
+                    if (oldPath != "") deleteImage(oldPath)
+                    onSuccess(it.toString())
+                }
+            }.addOnFailureListener {
 
             }
     }
 
+    fun deleteImage(path: String) {
+        val photoRef = FirebaseStorage.getInstance().getReferenceFromUrl(path)
+        photoRef.delete().addOnSuccessListener { // File deleted successfully
+            Log.d(TAG, "onSuccess: deleted file")
+        }.addOnFailureListener { // Uh-oh, an error occurred!
+            Log.d(TAG, "onFailure: did not delete file")
+        }
+
+    }
 
     fun createAccount(users: User, password: String?) {
         signUpLiveData.postValue(Result.loading(null))
@@ -97,6 +140,8 @@ class UserRepository @Inject constructor() {
 
     val signUpGetLiveData get() = signUpLiveData
     val signInGetLiveData get() = signInLiveData
+    val getWhereIdGetLiveData get() = getWhereIdLiveData
+    val updateGetLiveData get() = updateLiveData
 
 
 }
