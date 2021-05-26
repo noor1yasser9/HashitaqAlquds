@@ -68,12 +68,11 @@ class EditProfileDialog : BottomSheetDialogFragment() {
 
                 }
                 Result.Status.SUCCESS -> {
-                     mBinding.user = it.data as User
-
+                    mBinding.user = it.data as User
                 }
             }
         }
-        viewModel.updateGetLiveData.observe(viewLifecycleOwner){
+        viewModel.updateGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
                 }
@@ -102,63 +101,63 @@ class EditProfileDialog : BottomSheetDialogFragment() {
             )
         }
 
-}
+    }
 
-private fun createAccount() {
-    val name: String = mBinding.txtName.editText!!.text.toString()
-    val bio: String = mBinding.txtNote.editText!!.text.toString().trim()
-    val phone: String = mBinding.txtPhone.editText!!.text.toString()
-    if (TextUtils.isEmpty(name)) {
-        errorText(mBinding.txtName.editText!!, getString(R.string.field_required))
-    } else if (TextUtils.isEmpty(bio)) {
-        errorText(mBinding.txtNote.editText!!, getString(R.string.field_required))
-    } else if (TextUtils.isEmpty(phone)) {
-        errorText(mBinding.txtPhone.editText!!, getString(R.string.field_required))
-    } else if (Pattern.matches("[a-zA-Z-+]+", phone)
-        || phone.length != 12
-    ) {
-        errorText(mBinding.txtPhone.editText!!, getString(R.string.error_phone))
-    } else {
-        val map = mutableMapOf<String, Any>()
-        if (user.name != name) map["name"] = name
-        if (user.phone != phone) map["phone"] = phone
-        if (user.bio != bio) map["bio"] = bio
+    private fun createAccount() {
+        val name: String = mBinding.txtName.editText!!.text.toString()
+        val bio: String = mBinding.txtNote.editText!!.text.toString().trim()
+        val phone: String = mBinding.txtPhone.editText!!.text.toString()
+        if (TextUtils.isEmpty(name)) {
+            errorText(mBinding.txtName.editText!!, getString(R.string.field_required))
+        } else if (TextUtils.isEmpty(bio)) {
+            errorText(mBinding.txtNote.editText!!, getString(R.string.field_required))
+        } else if (TextUtils.isEmpty(phone)) {
+            errorText(mBinding.txtPhone.editText!!, getString(R.string.field_required))
+        } else if (Pattern.matches("[a-zA-Z-+]+", phone)
+            || phone.length != 12
+        ) {
+            errorText(mBinding.txtPhone.editText!!, getString(R.string.error_phone))
+        } else {
+            val map = mutableMapOf<String, Any>()
+            if (user.name != name) map["name"] = name
+            if (user.phone != phone) map["phone"] = phone
+            if (user.bio != bio) map["bio"] = bio
 
-        if (media==null) {
-            viewModel.update(mAuth.uid!!, map)
-            Log.e(TAG, "onSuccess: not uploadImage")
-        } else{
-            viewModel.uploadImage(user.image,compressFormat(media!!, requireActivity())){
-                Log.e(TAG, "onSuccess: uploadImage")
-                map["image"] = it
+            if (media == null) {
                 viewModel.update(mAuth.uid!!, map)
+                Log.e(TAG, "onSuccess: not uploadImage")
+            } else {
+                viewModel.uploadImage(user.image, compressFormat(media!!, requireActivity())) {
+                    Log.e(TAG, "onSuccess: uploadImage")
+                    map["image"] = it
+                    viewModel.update(mAuth.uid!!, map)
+                }
             }
         }
     }
-}
 
-private fun errorText(text: EditText, message: String) {
-    text.error = message
-    text.requestFocus()
-}
-
-private fun selectImage() {
-    intent.type = "image/*"
-    startActivityForResult(intent, REQUEST_IMAGE_CODE)
-}
-
-@RequiresApi(Build.VERSION_CODES.N)
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (requestCode == REQUEST_IMAGE_CODE &&
-        resultCode == Activity.RESULT_OK
-    ) {
-
-        media = data!!.data!!
-        val  imageStream = requireActivity().contentResolver.openInputStream(media!!)
-        val  selectedImage = BitmapFactory.decodeStream(imageStream)
-        mBinding.imgProfile.setImageBitmap(selectedImage)
-
+    private fun errorText(text: EditText, message: String) {
+        text.error = message
+        text.requestFocus()
     }
-}
+
+    private fun selectImage() {
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_IMAGE_CODE)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CODE &&
+            resultCode == Activity.RESULT_OK
+        ) {
+
+            media = data!!.data!!
+            val imageStream = requireActivity().contentResolver.openInputStream(media!!)
+            val selectedImage = BitmapFactory.decodeStream(imageStream)
+            mBinding.imgProfile.setImageURI(media)
+
+        }
+    }
 }

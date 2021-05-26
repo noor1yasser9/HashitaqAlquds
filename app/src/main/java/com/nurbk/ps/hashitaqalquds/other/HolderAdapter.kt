@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.nurbk.ps.hashitaqalquds.R
+import com.potyvideo.library.AndExoPlayerView
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
 
 
@@ -41,13 +42,14 @@ object HolderAdapter {
 
     @JvmStatic
     @BindingAdapter("uriVideo")
-    fun uriVideo(videoPlayer: JCVideoPlayerStandard, uri: String) {
+    fun uriVideo(videoPlayer: AndExoPlayerView , uri: String) {
         try {
-            videoPlayer.setUp(
-                uri,
-                JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,
-                uri
-            )
+//            videoPlayer.setUp(
+//                uri,
+//                JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,
+//                uri
+//            )
+            videoPlayer.setSource(uri);
         } catch (e: Exception) {
             e.printStackTrace()
         }

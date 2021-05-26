@@ -51,17 +51,23 @@
             app:layout_constraintTop_toBottomOf="@+id/header"
             tools:visibility="gone" />
 
-        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
-            android:id="@+id/videoplayer"
-            uriVideo="@{post.media}"
+<!--        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard-->
+<!--            android:id="@+id/videoplayer"-->
+<!--            uriVideo="@{post.media}"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_200sdp"-->
+<!--            android:layout_marginTop="@dimen/_8sdp"-->
+<!--            android:elevation="@dimen/_1sdp"-->
+<!--            android:src="@color/green_900"-->
+<!--            android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}"-->
+<!--            tools:visibility="gone" />-->
+        <com.potyvideo.library.AndExoPlayerView
+            android:id="@+id/andExoPlayerView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            uriVideo="@{post.media}"
             android:elevation="@dimen/_1sdp"
-            android:src="@color/green_900"
             android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}"
-            tools:visibility="gone" />
-
+            android:layout_height="@dimen/_200sdp"/>
         <include
             android:id="@+id/action"
             layout="@layout/item_post_action" />
