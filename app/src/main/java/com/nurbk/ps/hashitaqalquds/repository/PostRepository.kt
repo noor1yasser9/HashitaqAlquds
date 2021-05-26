@@ -4,13 +4,16 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.nurbk.ps.hashitaqalquds.model.Post
+import com.nurbk.ps.hashitaqalquds.model.User
 import com.nurbk.ps.hashitaqalquds.other.COLLECTION_POST
+import com.nurbk.ps.hashitaqalquds.other.COLLECTION_USERS
 import com.nurbk.ps.hashitaqalquds.util.Result
-import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -89,14 +92,29 @@ class PostRepository @Inject constructor() {
     }
 
     fun getAllPosts() {
-        getAllPostsLiveData.postValue(Result.loading(""))
+//        getAllPostsLiveData.postValue(Result.loading(""))
         db.collection(COLLECTION_POST).addSnapshotListener { value, error ->
             if (error == null) {
                 val array = ArrayList<Post>()
                 value?.let {
-                  it.forEach { p -> array.add(p.toObject(Post::class.java)) }
+                    it.forEach { p ->
+                        val post: Post =
+                            p.toObject(Post::class.java)
+                        FirebaseFirestore.getInstance()
+                            .collection(COLLECTION_USERS)
+                            .document(post.userId)
+                            .addSnapshotListener { value1: DocumentSnapshot?, error1: FirebaseFirestoreException? ->
+                                if (error1 == null) {
+                                    if (value1 != null)
+                                        post.users = (value1.toObject(User::class.java)!!)
+                                    array.add(post)
+                                    getAllPostsLiveData.postValue(Result.success(array))
+                                }
+                            }
+                    }
                 }
-                getAllPostsLiveData.postValue(Result.success(array))
+                if (value == null)
+                    getAllPostsLiveData.postValue(Result.empty(array))
             } else {
                 getAllPostsLiveData.postValue(Result.error(error.message, ""))
             }

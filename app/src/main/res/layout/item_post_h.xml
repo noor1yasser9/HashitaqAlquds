@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@color/green_900" />
@@ -37,7 +38,8 @@
             android:layout_marginHorizontal="@dimen/_8sdp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="@string/share"
+            android:text="@{post.users.name}"
+            android:textAlignment="viewStart"
             android:textColor="@color/textColor"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toStartOf="@+id/btnMore"
@@ -50,7 +52,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="45/48/6263 78:48 pm"
+            android:text="@{post.formatDate()}"
             android:textAlignment="viewStart"
             app:layout_constraintBottom_toBottomOf="@+id/btnImage"
             app:layout_constraintEnd_toEndOf="@+id/txtName"

@@ -73,7 +73,6 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
                 Result.Status.LOADING -> {
                     if (!loadingDialog.isAdded)
                         loadingDialog.show(requireActivity().supportFragmentManager, "")
-
                 }
                 Result.Status.SUCCESS -> {
                     try {

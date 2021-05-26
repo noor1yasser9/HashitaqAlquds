@@ -42,8 +42,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
     }
 
     private var type = CONTENT_TYPE
-
-
+    private var loading: String? = null
     private val intent by lazy {
         Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
     }
@@ -71,12 +70,18 @@ class DialogAddPost : BottomSheetDialogFragment() {
                     loadingDialog.dismiss()
                 }
                 Result.Status.LOADING -> {
+                    loading = it.data.toString()
                     if (!loadingDialog.isAdded)
                         loadingDialog.show(requireActivity().supportFragmentManager, "")
                 }
                 Result.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
-                    findNavController().popBackStack()
+                    if (loading != null) {
+                        try {
+                            loadingDialog.dismiss()
+                        } catch (e: Exception) {
+                        }
+                        findNavController().popBackStack()
+                    }
                 }
             }
         }
@@ -135,6 +140,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
         startActivityForResult(mIntent, REQUEST_FILE_CODE)
 
     }
+
     private fun addPost() {
         val hash = mBinding.listHash.selectedItem.toString()
         val content = mBinding.txtContent.text.toString().trim()
@@ -156,7 +162,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
                         post
                     )
                 }
-              PHOTO_TYPE -> {
+                PHOTO_TYPE -> {
                     viewMode.uploadImage(compressFormat(media!!, requireActivity())) {
                         post.media = it
                         viewMode.insert(
@@ -176,7 +182,7 @@ class DialogAddPost : BottomSheetDialogFragment() {
 
                     })
                 }
-              PDF_TYPE -> {
+                PDF_TYPE -> {
                     viewMode.uploadVideo(media!!, "pdf", {
                         post.media = it
                         viewMode.insert(
@@ -205,11 +211,10 @@ class DialogAddPost : BottomSheetDialogFragment() {
         ) {
             type = VIDEO_TYPE
             media = data!!.data!!
-        }
-        else if (requestCode == REQUEST_FILE_CODE &&
+        } else if (requestCode == REQUEST_FILE_CODE &&
             resultCode == Activity.RESULT_OK
         ) {
-            type =PDF_TYPE
+            type = PDF_TYPE
             media = data!!.data!!
         }
     }

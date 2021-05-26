@@ -1,12 +1,15 @@
 package com.nurbk.ps.hashitaqalquds.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.ItemPostImageBinding
 import com.nurbk.ps.hashitaqalquds.model.Post
@@ -14,6 +17,7 @@ import com.nurbk.ps.hashitaqalquds.other.ACTION_COMMENT
 import com.nurbk.ps.hashitaqalquds.other.ACTION_LIKE
 import com.nurbk.ps.hashitaqalquds.other.ACTION_MORE
 import com.nurbk.ps.hashitaqalquds.other.ACTION_PROFILE
+import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
 import javax.inject.Inject
 
 class PostAdapter @Inject constructor(val glide: RequestManager) :
@@ -28,6 +32,9 @@ class PostAdapter @Inject constructor(val glide: RequestManager) :
             mBinding.post = post
             with(mBinding) {
                 glide.load(post.media).into(imagePost)
+                glide.load(post.users.image).into(header.image)
+                header.btnMore.isVisible =
+                    FirebaseAuth.getInstance().uid.toString() == post.userId
                 action.commit.setOnClickListener {
                     onClick.onClickItem(post, ACTION_COMMENT)
                 }
