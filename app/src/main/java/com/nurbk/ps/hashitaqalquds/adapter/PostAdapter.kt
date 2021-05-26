@@ -1,23 +1,22 @@
 package com.nurbk.ps.hashitaqalquds.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.ItemPostImageBinding
 import com.nurbk.ps.hashitaqalquds.model.Post
-import com.nurbk.ps.hashitaqalquds.other.ACTION_COMMENT
-import com.nurbk.ps.hashitaqalquds.other.ACTION_LIKE
-import com.nurbk.ps.hashitaqalquds.other.ACTION_MORE
-import com.nurbk.ps.hashitaqalquds.other.ACTION_PROFILE
-import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
+import com.nurbk.ps.hashitaqalquds.other.*
 import javax.inject.Inject
 
 class PostAdapter @Inject constructor(val glide: RequestManager) :
@@ -31,34 +30,16 @@ class PostAdapter @Inject constructor(val glide: RequestManager) :
         fun onBind(post: Post) {
             mBinding.post = post
             with(mBinding) {
-                glide.load(post.media).into(imagePost)
-                glide.load(post.users.image).into(header.image)
-                header.btnMore.isVisible =
-                    FirebaseAuth.getInstance().uid.toString() == post.userId
-                action.commit.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_COMMENT)
-                }
-                action.btnComment.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_COMMENT)
-                }
-                action.like.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_LIKE)
-                }
-                action.btnLike.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_LIKE)
-                }
 
-                header.btnImage.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_PROFILE)
-                }
-                header.txtName.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_PROFILE)
-                }
-
-                header.btnMore.setOnClickListener {
-                    onClick.onClickItem(post, ACTION_MORE)
-                }
-
+                generateColor(header.txtNameLetter, root.context)
+                header.btnMore.isVisible = FirebaseAuth.getInstance().uid.toString() == post.userId
+                action.commit.setOnClickListener { onClick.onClickItem(post, ACTION_COMMENT) }
+                action.btnComment.setOnClickListener { onClick.onClickItem(post, ACTION_COMMENT) }
+                action.like.setOnClickListener { onClick.onClickItem(post, ACTION_LIKE) }
+                action.btnLike.setOnClickListener { onClick.onClickItem(post, ACTION_LIKE) }
+                header.btnImage.setOnClickListener { onClick.onClickItem(post, ACTION_PROFILE) }
+                header.txtName.setOnClickListener { onClick.onClickItem(post, ACTION_PROFILE) }
+                header.btnMore.setOnClickListener { onClick.onClickItem(post, ACTION_MORE) }
             }
         }
 
@@ -102,4 +83,10 @@ class PostAdapter @Inject constructor(val glide: RequestManager) :
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
+
+    fun getImage(context: Context, text: String, imageView: ImageView) {
+        Glide.with(context)
+            .load(text)
+            .into(imageView)
+    }
 }

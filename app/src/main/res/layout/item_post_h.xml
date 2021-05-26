@@ -8,6 +8,8 @@
         <variable
             name="post"
             type="com.nurbk.ps.hashitaqalquds.model.Post" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +28,21 @@
 
             <ImageView
                 android:id="@+id/image"
+                uriImage="@{post.users.image}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/txtNameLetter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@color/green_900" />
+                android:gravity="center"
+                android:maxLength="1"
+                android:text="@{post.users.name}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
+                android:visibility='@{post.users.image==""?View.VISIBLE:View.GONE }' />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
