@@ -17,6 +17,7 @@ import com.nurbk.ps.hashitaqalquds.model.Welcome
 import com.nurbk.ps.hashitaqalquds.model.getData
 import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
+import com.nurbk.ps.hashitaqalquds.util.MemberItemDecoration
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,6 +61,7 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
 
         mBinding.rcData.apply {
             adapter = mAdapter
+            addItemDecoration(MemberItemDecoration());
         }
 
 
@@ -93,6 +95,7 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
             ACTION_MORE -> {
             }
             ACTION_COMMENT -> {
+                findNavController().navigate(R.id.action_homeFragment_to_commentFragment)
             }
             ACTION_LIKE -> {
             }
