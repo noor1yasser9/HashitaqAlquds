@@ -1,5 +1,6 @@
 package com.nurbk.ps.hashitaqalquds.ui.fragment.splash
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,4 +55,16 @@ class WelcomeFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<W
     override fun onClickItem(itemViewModel: Welcome, type: Int, position: Int) {
 
     }
+    private fun getData(context: Context) =
+        arrayListOf(
+            Welcome(
+                R.drawable.w1,
+                context.getString(R.string.w1)
+            ),
+            Welcome(
+                R.drawable.w2,
+                context.getString(R.string.w2)
+            )
+
+        )
 }

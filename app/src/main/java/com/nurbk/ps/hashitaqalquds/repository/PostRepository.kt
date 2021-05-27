@@ -13,6 +13,7 @@ import com.nurbk.ps.hashitaqalquds.model.Post
 import com.nurbk.ps.hashitaqalquds.model.User
 import com.nurbk.ps.hashitaqalquds.other.COLLECTION_POST
 import com.nurbk.ps.hashitaqalquds.other.COLLECTION_USERS
+import com.nurbk.ps.hashitaqalquds.other.FIELD_LIKE
 import com.nurbk.ps.hashitaqalquds.util.Result
 import java.util.*
 import javax.inject.Inject
@@ -31,6 +32,7 @@ class PostRepository @Inject constructor() {
     private val getAllPostWhereUserIdLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val getAllPostsLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val getLikesLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+    private val getPostLikesLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val getCommentsLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
 
 
@@ -68,15 +70,44 @@ class PostRepository @Inject constructor() {
     }
 
 
-    fun addLike(postId: String, userId: String) {
+    fun addLike(postId: String, userArray:ArrayList<String>) {
         addLikeLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).document(postId).collection("likes").add(userId)
+        db.collection(COLLECTION_POST).document(postId).update(FIELD_LIKE,userArray)
             .addOnFailureListener {
                 addLikeLiveData.postValue(Result.error(it.message, ""))
             }.addOnSuccessListener {
                 addLikeLiveData.postValue(Result.success(it))
             }
 
+    }
+    fun getPostLikeUser(userId:String){
+        getPostLikesLiveData.postValue(Result.loading(""))
+        db.collection(COLLECTION_POST).whereEqualTo(FIELD_LIKE,userId).addSnapshotListener { value, error ->
+            if (error == null) {
+                val array = ArrayList<Post>()
+                value?.let {
+                    it.forEach { p ->
+                        val post: Post =
+                            p.toObject(Post::class.java)
+                        FirebaseFirestore.getInstance()
+                            .collection(COLLECTION_USERS)
+                            .document(post.userId)
+                            .addSnapshotListener { value1: DocumentSnapshot?, error1: FirebaseFirestoreException? ->
+                                if (error1 == null) {
+                                    if (value1 != null)
+                                        post.users = (value1.toObject(User::class.java)!!)
+                                    array.add(post)
+                                    getPostLikesLiveData.postValue(Result.success(array))
+                                }
+                            }
+                    }
+                }
+                if (value == null)
+                    getPostLikesLiveData.postValue(Result.empty(array))
+            } else {
+                getPostLikesLiveData.postValue(Result.error(error.message, ""))
+            }
+        }
     }
 
 
@@ -211,6 +242,7 @@ class PostRepository @Inject constructor() {
     val getAllPostWhereUserIdGetLiveData get() = getAllPostWhereUserIdLiveData
     val getAllPostsGetLiveData get() = getAllPostsLiveData
     val getLikesGetLiveData get() = getLikesLiveData
+    val getPostLikesGetLiveData get() = getPostLikesLiveData
     val getCommentsGetLiveData get() = getCommentsLiveData
 
 

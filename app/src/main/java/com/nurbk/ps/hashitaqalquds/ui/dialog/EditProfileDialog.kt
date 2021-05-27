@@ -3,7 +3,6 @@ package com.nurbk.ps.hashitaqalquds.ui.dialog
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -20,9 +19,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.DialogEditProfileBinding
 import com.nurbk.ps.hashitaqalquds.model.User
-import com.nurbk.ps.hashitaqalquds.other.*
-import com.nurbk.ps.hashitaqalquds.other.HolderAdapter.uriImage
-import com.nurbk.ps.hashitaqalquds.repository.UserRepository
+import com.nurbk.ps.hashitaqalquds.other.REQUEST_IMAGE_CODE
+import com.nurbk.ps.hashitaqalquds.other.compressFormat
+import com.nurbk.ps.hashitaqalquds.other.permission
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,7 +67,9 @@ class EditProfileDialog : BottomSheetDialogFragment() {
 
                 }
                 Result.Status.SUCCESS -> {
-                    mBinding.user = it.data as User
+                    user = it.data as User
+                    mBinding.user = user
+
                 }
             }
         }
@@ -154,9 +155,7 @@ class EditProfileDialog : BottomSheetDialogFragment() {
         ) {
 
             media = data!!.data!!
-            val imageStream = requireActivity().contentResolver.openInputStream(media!!)
-            val selectedImage = BitmapFactory.decodeStream(imageStream)
-            mBinding.imgProfile.setImageURI(media)
+            mBinding.imgProfile.setImageURI(media!!)
 
         }
     }

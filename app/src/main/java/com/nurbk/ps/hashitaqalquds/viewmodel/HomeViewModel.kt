@@ -22,8 +22,8 @@ class HomeViewModel @Inject constructor(
     fun deletePost(postId: String) {
         postRepository.delete(postId)
     }
-    fun addLike(postId: String, userId: String) {
-        postRepository.addLike(postId, userId)
+    fun addLike(postId: String, userArray: ArrayList<String>) {
+        postRepository.addLike(postId,userArray)
     }
     fun addComment(postId: String, post: Post) {
         postRepository.addComment(postId, post)

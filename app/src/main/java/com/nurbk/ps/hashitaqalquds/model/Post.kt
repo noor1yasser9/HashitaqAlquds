@@ -12,6 +12,7 @@ data class Post(
     val content: String = "",
     var media: String = "",
     val type: Int = 0,
+    val likes : ArrayList<String> = arrayListOf(),
     @Exclude @Expose(deserialize = false, serialize = false)
     var users: User = User()
 ){
