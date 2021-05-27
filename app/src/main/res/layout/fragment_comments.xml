@@ -80,14 +80,7 @@
                     android:id="@+id/action"
                     layout="@layout/item_post_action" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
-                    android:background="@color/colorAction"
-                    android:elevation="0dp"
-                    android:hint="@string/enterComment"
-                    android:padding="@dimen/_8sdp"
-                    android:translationY="-16dp" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcData"
@@ -99,7 +92,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+        <EditText
+            android:id="@+id/txtComment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@color/colorAction"
+            android:elevation="0dp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:layout_gravity="bottom"
+            android:hint="@string/enterComment"
+            android:padding="@dimen/_8sdp"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -25,28 +25,22 @@ class HomeViewModel @Inject constructor(
     fun addLike(postId: String, userArray: ArrayList<String>) {
         postRepository.addLike(postId,userArray)
     }
-    fun addComment(postId: String, post: Post) {
-        postRepository.addComment(postId, post)
-    }
+
     fun getAllPostWhereUserId(userId: String) {
         postRepository.getAllWhereUserId(userId)
     }
     fun getLikes(postId: String) {
         postRepository.getLikes(postId)
     }
-    fun getComments(postId: String) {
-        postRepository.getComments(postId)
-    }
+
 
 
     val deletePostGetLiveData get() = postRepository.deletePostGetLiveData
     val addLikeGetLiveData get() = postRepository.addLikeGetLiveData
-    val addCommentGetLiveData get() = postRepository.addCommentGetLiveData
     val updatePostGetLiveData get() = postRepository.updatePostGetLiveData
 
     val getAllPostWhereUserIdGetLiveData get() = postRepository.getAllPostWhereUserIdGetLiveData
     val getAllPostsGetLiveData get() = postRepository.getAllPostsGetLiveData
 
     val getLikesGetLiveData get() = postRepository.getLikesGetLiveData
-    val getCommentsGetLiveData get() =  postRepository.getCommentsGetLiveData
 }

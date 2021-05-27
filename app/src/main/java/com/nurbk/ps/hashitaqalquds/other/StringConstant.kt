@@ -17,6 +17,7 @@ const val PHOTO_TYPE = 0
 const val VIDEO_TYPE = 1
 const val PDF_TYPE = 2
 const val CONTENT_TYPE = 4
+const val NULL_TYPE = 4
 
 const val ACTION_COMMENT = 1
 const val ACTION_LIKE = 2

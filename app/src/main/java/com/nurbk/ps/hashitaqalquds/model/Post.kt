@@ -14,7 +14,7 @@ data class Post(
     val date: Long = 0,
     val tag: String = "",
     val content: String = "",
-    var media: String = "",
+    var media: String? = "",
     val type: Int = 0,
     val likes : ArrayList<String> = arrayListOf(),
     @Exclude @Expose(deserialize = false, serialize = false)
