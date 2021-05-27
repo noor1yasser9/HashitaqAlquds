@@ -81,6 +81,14 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_homeFragment_to_commentFragment"
+            app:destination="@id/commentFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -148,6 +156,10 @@
         android:id="@+id/landmarksFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarksFragment"
         android:label="LandmarksFragment" />
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.CommentFragment"
+        android:label="CommentFragment" />
 
 
 </navigation>

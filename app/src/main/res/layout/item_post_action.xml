@@ -12,7 +12,7 @@
         android:layout_height="@dimen/_70sdp"
         android:translationY="-13dp"
         app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="0dp">
+        app:cardElevation="1dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

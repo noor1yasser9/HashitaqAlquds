@@ -44,11 +44,6 @@ object HolderAdapter {
     @BindingAdapter("uriVideo")
     fun uriVideo(videoPlayer: AndExoPlayerView , uri: String) {
         try {
-//            videoPlayer.setUp(
-//                uri,
-//                JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,
-//                uri
-//            )
             videoPlayer.setSource(uri);
         } catch (e: Exception) {
             e.printStackTrace()

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="com.nurbk.ps.hashitaqalquds.model.Post" />
+
+        <import type="com.nurbk.ps.hashitaqalquds.other.StringConstantKt" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbarView"
+            layout="@layout/toolbar_layout" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:visibility="visible"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/header"
+                    layout="@layout/item_post_h"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:post="@{post}" />
+
+
+                <ImageView
+                    android:id="@+id/imagePost"
+                    uriImage="@{post.media}"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/black"
+                    android:elevation="@dimen/_2sdp"
+                    android:visibility="@{post.type==StringConstantKt.PHOTO_TYPE?View.VISIBLE:View.GONE}" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:padding="@dimen/_30sdp"
+                    android:src="@drawable/ic_pdf"
+                    android:elevation="@dimen/_2sdp"
+                    android:visibility="@{post.type==StringConstantKt.PDF_TYPE?View.VISIBLE:View.GONE}"
+                    app:layout_constraintTop_toBottomOf="@+id/header"
+                    tools:visibility="gone" />
+
+                <com.potyvideo.library.AndExoPlayerView
+                    android:id="@+id/andExoPlayerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:elevation="@dimen/_2sdp"
+                    android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}" />
+
+                <include
+                    android:id="@+id/action"
+                    layout="@layout/item_post_action" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:background="@color/colorAction"
+                    android:elevation="0dp"
+                    android:hint="@string/enterComment"
+                    android:padding="@dimen/_8sdp"
+                    android:translationY="-16dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
