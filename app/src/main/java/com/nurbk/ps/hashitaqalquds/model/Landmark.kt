@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Landmark(
     val name: String = "",
-    val details: String = "",
+    val description: String = "",
     val images: ArrayList<String> = arrayListOf(),
-    val location: LatLng = LatLng(0.0,0.0),
+    val location: String = ""
 ):Parcelable
