@@ -126,7 +126,8 @@ dependencies {
     implementation 'fm.jiecao:jiecaovideoplayer:5.7'
 
     //wang.avi
-    implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:2.0.6'
+    implementation 'cn.jzvd:jiaozivideoplayer:6.1.2'
+    implementation 'com.danikula:videocache:2.7.1'
     implementation 'com.wang.avi:library:2.1.3'
 
 

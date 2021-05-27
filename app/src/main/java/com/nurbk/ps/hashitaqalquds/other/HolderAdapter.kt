@@ -1,15 +1,13 @@
 package com.nurbk.ps.hashitaqalquds.other
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
-import android.util.Log
+import android.content.Context
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import cn.jzvd.JZVideoPlayerStandard
 import com.bumptech.glide.Glide
-import com.nurbk.ps.hashitaqalquds.R
-import com.potyvideo.library.AndExoPlayerView
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+import com.bumptech.glide.request.RequestOptions
+import com.danikula.videocache.HttpProxyCacheServer
+import com.nurbk.ps.hashitaqalquds.BaseApplication
 
 
 object HolderAdapter {
@@ -42,12 +40,20 @@ object HolderAdapter {
 
     @JvmStatic
     @BindingAdapter("uriVideo")
-    fun uriVideo(videoPlayer: AndExoPlayerView , uri: String) {
+    fun uriVideo(jzVideoPlayerStandard: JZVideoPlayerStandard, uri: String) {
         try {
-            videoPlayer.setSource(uri);
+
+            jzVideoPlayerStandard.setUp(
+                uri,
+                JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,
+                ""
+            )
+            Glide.with(jzVideoPlayerStandard.context).load(uri)
+                .into(jzVideoPlayerStandard.thumbImageView)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
+
 
 }

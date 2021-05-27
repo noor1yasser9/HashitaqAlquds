@@ -1,18 +1,20 @@
 package com.nurbk.ps.hashitaqalquds.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import cn.jzvd.JZVideoPlayer
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -96,5 +98,16 @@ class MainActivity : AppCompatActivity() {
             .setPopExitAnim(R.anim.slide_out_right)
             .build()
     }
+    override fun onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return
+        }
+        JZVideoPlayer.releaseAllVideos()
+        super.onBackPressed()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        JZVideoPlayer.releaseAllVideos()
+    }
 }

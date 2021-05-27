@@ -61,7 +61,7 @@
 <!--            android:src="@color/green_900"-->
 <!--            android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}"-->
 <!--            tools:visibility="gone" />-->
-        <com.potyvideo.library.AndExoPlayerView
+        <cn.jzvd.JZVideoPlayerStandard
             android:id="@+id/andExoPlayerView"
             android:layout_width="match_parent"
             uriVideo="@{post.media}"

@@ -89,13 +89,15 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
     }
 
     override fun onClickItem(post: Post, type: Int) {
+        val bundle = Bundle()
+        bundle.putParcelable(DATA_POST, post)
         when (type) {
             ACTION_PROFILE -> {
             }
             ACTION_MORE -> {
             }
             ACTION_COMMENT -> {
-                findNavController().navigate(R.id.action_homeFragment_to_commentFragment)
+                findNavController().navigate(R.id.action_homeFragment_to_commentFragment, bundle)
             }
             ACTION_LIKE -> {
             }

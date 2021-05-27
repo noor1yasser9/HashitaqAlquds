@@ -68,11 +68,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/header"
                     tools:visibility="gone" />
 
-                <com.potyvideo.library.AndExoPlayerView
+                <cn.jzvd.JZVideoPlayerStandard
                     android:id="@+id/andExoPlayerView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:elevation="@dimen/_2sdp"
+                    uriVideo="@{post.media}"
                     android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}" />
 
                 <include
