@@ -29,7 +29,6 @@ const val REQUEST_VIDEO_CODE = 2
 const val REQUEST_FILE_CODE = 3
 
 const val COLLECTION_POST = "posts"
-const val COMMENT_POST = "comments"
 const val COLLECTION_USERS = "users"
 const val PREFERENCES_NAME = "FileName"
 const val USER_PROFILE = "UserProfile"
@@ -37,7 +36,10 @@ const val IS_LOGIN = "isLogin"
 const val IS_UPDATE = "isUpdate"
 const val FIELD_LIKE = "likes"
 const val DATA_POST = "post"
-
-
+const val COMMENT_POST = "comments"
+const val VALUE_TYPE = "application/json"
+const val AUTH_VALUE =
+    "AAAAHNztFsQ:APA91bGPfOf4Z8YAIAhG1Lms1kO4Bj0MPI1lYzXJuF-TwBjsezV8DhrUk7y3vAgNoeITT_BD7Lf_6hdITENsnsEDCFll3GHasxrQThvTVr96gbXZ7fz1XQcVZFNeTtmAzvoI_rqWOnSF"
+const val BASE_URL = "https://fcm.googleapis.com/fcm/"
 
 

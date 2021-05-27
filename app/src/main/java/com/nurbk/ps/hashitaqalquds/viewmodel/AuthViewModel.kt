@@ -28,6 +28,7 @@ class AuthViewModel @Inject constructor(
         userRepository.createAccount(user, pass)
     }
 
+
     val signUpGetLiveData get() = userRepository.signUpGetLiveData
     val signInGetLiveData get() = userRepository.signInGetLiveData
 

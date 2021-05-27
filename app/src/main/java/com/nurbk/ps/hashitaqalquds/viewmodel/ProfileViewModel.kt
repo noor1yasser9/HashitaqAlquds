@@ -13,7 +13,7 @@ class ProfileViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
     fun update(id: String, user: Map<String, Any>) {
-        userRepository.update(id, user)
+        userRepository.update(id, user){}
     }
 
     fun getWhereId(id: String) {

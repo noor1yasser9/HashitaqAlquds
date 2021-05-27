@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.nurbk.ps.hashitaqalquds.model.Post
 import com.nurbk.ps.hashitaqalquds.repository.PostRepository
+import com.nurbk.ps.hashitaqalquds.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.nurbk.ps.hashitaqalquds.util.Result
@@ -14,6 +15,7 @@ import java.lang.Exception
 @HiltViewModel
 class AddPostViewModel @Inject constructor(
     val postRepository: PostRepository,
+    val userRepository: UserRepository,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -22,15 +24,18 @@ class AddPostViewModel @Inject constructor(
     }
 
     fun updatePost(postId: String, post: Map<String, Any>) {
-        postRepository.update(postId, post)
+        postRepository.update(postId, post) {}
     }
 
 
     //post getting live data
     val insertPostGetLiveData get() = postRepository.insertPostGetLiveData
     val updatePostGetLiveData get() = postRepository.insertPostGetLiveData
+    fun getToken() = userRepository.getTokenId(){}
 
-
+    init {
+        getToken()
+    }
     fun uploadImage(
         selectedImageBytes: ByteArray,
         onSuccess: (imagePath: String) -> Unit

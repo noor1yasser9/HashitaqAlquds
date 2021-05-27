@@ -8,10 +8,12 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.nurbk.ps.hashitaqalquds.model.User
 import com.nurbk.ps.hashitaqalquds.other.COLLECTION_USERS
+import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
 import com.nurbk.ps.hashitaqalquds.util.Result
 import java.util.*
 import javax.inject.Inject
@@ -30,14 +32,15 @@ class UserRepository @Inject constructor() {
         FirebaseAuth.getInstance()
     }
 
-    fun update(id: String, user: Map<String, Any>) =
+    fun update(id: String, user: Map<String, Any>, onComplete: () -> Unit) =
         db.collection(COLLECTION_USERS).document(id).update(user).addOnSuccessListener {
             updateLiveData.postValue(
                 Result.success(it)
             )
+            onComplete()
         }.addOnFailureListener {
             updateLiveData.postValue(
-                Result.error(it.message,null)
+                Result.error(it.message, null)
             )
         }
 
@@ -109,8 +112,6 @@ class UserRepository @Inject constructor() {
                 users.id = (FirebaseAuth.getInstance().uid).toString()
                 insert(users)
             }.addOnFailureListener { ex: java.lang.Exception? ->
-//                handelExp(ex!!)
-                Log.e("ttttttt", ex!!.message!!)
                 signUpLiveData.postValue(Result.error("", ex))
 
             }
@@ -135,6 +136,22 @@ class UserRepository @Inject constructor() {
             signUpLiveData.postValue(Result.error("", ex))
         } catch (e: java.lang.Exception) {
             Log.e(TAG, e.message!!)
+        }
+    }
+
+
+    fun getTokenId(onComplete: () -> Unit) {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (it.isSuccessful) {
+                update(
+                    auth.uid.toString(),
+                    mapOf("token" to it.result.toString())
+                ) {
+                    getWhereId(auth.uid.toString()) {
+                        onComplete()
+                    }
+                }
+            }
         }
     }
 

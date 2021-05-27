@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.nurbk.ps.hashitaqalquds.model.Post
@@ -52,9 +53,10 @@ class PostRepository @Inject constructor() {
     }
 
 
-    fun update(postId: String, post: Map<String, Any>) {
+    fun update(postId: String, post: Map<String, Any>, onComplete: () -> Unit) {
         updatePostLiveData.postValue(Result.loading(""))
         db.collection(COLLECTION_POST).document(postId).update(post).addOnFailureListener {
+            onComplete()
             updatePostLiveData.postValue(Result.error(it.message, ""))
         }.addOnSuccessListener {
             updatePostLiveData.postValue(Result.success(it))
