@@ -7,4 +7,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LandmarkViewModel @Inject constructor(application: Application): AndroidViewModel(application){
+
 }
