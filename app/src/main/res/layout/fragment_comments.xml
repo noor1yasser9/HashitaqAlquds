@@ -76,13 +76,15 @@
                     uriVideo="@{post.media}"
                     android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}" />
 
-                <include
-                    android:id="@+id/action"
-                    layout="@layout/item_post_action" />
-
-
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:text="@string/comments"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:background="@color/colorAction"/>
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:id="@+id/rcData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

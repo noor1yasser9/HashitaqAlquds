@@ -15,22 +15,23 @@ import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentCommentsBinding
 import com.nurbk.ps.hashitaqalquds.model.Post
-import com.nurbk.ps.hashitaqalquds.other.COLLECTION_POST
-import com.nurbk.ps.hashitaqalquds.other.DATA_POST
-import com.nurbk.ps.hashitaqalquds.other.NULL_TYPE
-import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.AddPostViewModel
 import com.nurbk.ps.hashitaqalquds.viewmodel.CommentViewModel
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class CommentFragment : Fragment(),GenericAdapter.OnListItemViewClickListener<Post> {
+
     @Inject
     lateinit var viewMode: CommentViewModel
+
     private val mBinding by lazy {
         FragmentCommentsBinding.inflate(layoutInflater)
     }
@@ -66,17 +67,19 @@ class CommentFragment : Fragment(),GenericAdapter.OnListItemViewClickListener<Po
                 viewMode.getComments(post.id)
             }
         }
+
         viewMode.getCommentsGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
+                    loadingDialog.dismiss()
                 }
                 Result.Status.ERROR -> {
                     loadingDialog.dismiss()
                 }
                 Result.Status.LOADING -> {
                     loading = it.data.toString()
-                    if (!loadingDialog.isAdded)
-                        loadingDialog.show(requireActivity().supportFragmentManager, "")
+                 //   if (!loadingDialog.isAdded)
+                      //  loadingDialog.show(requireActivity().supportFragmentManager, "")
                 }
                 Result.Status.SUCCESS -> {
                     if (loading != null) {
@@ -90,12 +93,15 @@ class CommentFragment : Fragment(),GenericAdapter.OnListItemViewClickListener<Po
                 }
             }
         }
+        mBinding.rcData.apply {
+            adapter = mAdapter
+        }
         viewMode.addCommentGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
                 }
                 Result.Status.ERROR -> {
-                    loadingDialog.dismiss()
+                 //   loadingDialog.dismiss()
                 }
                 Result.Status.LOADING -> {
                     loading = it.data.toString()
@@ -114,15 +120,19 @@ class CommentFragment : Fragment(),GenericAdapter.OnListItemViewClickListener<Po
             }
         }
         mBinding.txtComment.setOnEditorActionListener { _, _, _ ->
+            if (mBinding.txtComment.text.isNotEmpty()){
+            addComment()
             mBinding.txtComment.text.clear()
             mBinding.txtComment.clearFocus()
             false
+            }else true
         }
     }
 fun addComment(){
     val content = mBinding.txtComment.text.toString().trim()
     val comment = Post(
-        id = FirebaseFirestore.getInstance().collection(COLLECTION_POST).document().id,
+        id = FirebaseFirestore.getInstance().collection(COLLECTION_POST).document().collection(
+            COMMENT_POST).document().id,
         userId = FirebaseAuth.getInstance().uid.toString(),
         date = Calendar.getInstance().time.time,
         tag = post.tag, content = content, media = null, NULL_TYPE

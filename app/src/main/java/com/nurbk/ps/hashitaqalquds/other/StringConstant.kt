@@ -29,6 +29,7 @@ const val REQUEST_VIDEO_CODE = 2
 const val REQUEST_FILE_CODE = 3
 
 const val COLLECTION_POST = "posts"
+const val COMMENT_POST = "comments"
 const val COLLECTION_USERS = "users"
 const val PREFERENCES_NAME = "FileName"
 const val USER_PROFILE = "UserProfile"
