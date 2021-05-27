@@ -34,6 +34,7 @@ const val USER_PROFILE = "UserProfile"
 const val IS_LOGIN = "isLogin"
 const val IS_UPDATE = "isUpdate"
 const val FIELD_LIKE = "likes"
+const val DATA_POST = "post"
 
 
 
