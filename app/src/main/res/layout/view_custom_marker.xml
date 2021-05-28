@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        app:tint="@color/textColor"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_mrker" />
 </FrameLayout>

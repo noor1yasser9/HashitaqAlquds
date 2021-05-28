@@ -1,5 +1,7 @@
 package com.nurbk.ps.hashitaqalquds.ui.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -95,7 +97,12 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
         val bundle = Bundle()
         bundle.putParcelable(DATA_POST, post)
         when (type) {
+            ACTION_PDF -> {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.media))
+                requireActivity().startActivity(browserIntent)
+            }
             ACTION_PROFILE -> {
+
             }
             ACTION_MORE -> {
             }

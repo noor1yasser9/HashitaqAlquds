@@ -40,7 +40,7 @@
             android:visibility="@{post.type==StringConstantKt.PHOTO_TYPE?View.VISIBLE:View.GONE}" />
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/btnPdf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_8sdp"

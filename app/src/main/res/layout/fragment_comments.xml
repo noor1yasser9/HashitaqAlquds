@@ -61,55 +61,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:elevation="@dimen/_2sdp"
                     android:padding="@dimen/_30sdp"
                     android:src="@drawable/ic_pdf"
-                    android:elevation="@dimen/_2sdp"
                     android:visibility="@{post.type==StringConstantKt.PDF_TYPE?View.VISIBLE:View.GONE}"
                     app:layout_constraintTop_toBottomOf="@+id/header"
                     tools:visibility="gone" />
 
                 <cn.jzvd.JZVideoPlayerStandard
                     android:id="@+id/andExoPlayerView"
+                    uriVideo="@{post.media}"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:elevation="@dimen/_2sdp"
-                    uriVideo="@{post.media}"
                     android:visibility="@{post.type==StringConstantKt.VIDEO_TYPE?View.VISIBLE:View.GONE}" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:text="@string/comments"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@color/colorAction"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/_8sdp"
-                    android:background="@color/colorAction"/>
+                    android:text="@string/comments"
+                    android:textColor="@color/black" />
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="@dimen/_16sdp"
                     android:id="@+id/rcData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"/>
+                    android:layout_height="@dimen/_60sdp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
         <EditText
             android:id="@+id/txtComment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="bottom"
             android:background="@color/colorAction"
             android:elevation="0dp"
+            android:hint="@string/enterComment"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:layout_gravity="bottom"
-            android:hint="@string/enterComment"
             android:padding="@dimen/_8sdp"
-            />
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

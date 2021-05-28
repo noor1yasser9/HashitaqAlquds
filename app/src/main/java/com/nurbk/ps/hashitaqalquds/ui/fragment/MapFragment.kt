@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -23,6 +24,7 @@ import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentMapBinding
 import com.nurbk.ps.hashitaqalquds.model.Landmark
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.other.stateTheme
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.MapViewModel
@@ -68,6 +70,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         ) {
             findNavController().navigate(R.id.action_mapFragment_to_landmarksFragment)
         }
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        stateTheme(requireContext(), googleMap)
+        mMap = googleMap
+        mMap.setPadding(20, 30, 30, 340)
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.setOnMarkerClickListener(this)
+
         viewModel.getLandmarkLiveDataGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
@@ -85,7 +97,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     } catch (e: Exception) {
                     }
                     if (isShowData) {
-                        (it.data as ArrayList<Landmark>).forEach { landmark ->
+                        val data = it.data as ArrayList<Landmark>
+                        (data).forEach { landmark ->
                             if (landmark.latLng.isNotEmpty()) {
                                 val location =
                                     landmark.latLng.split(",".toRegex()).toTypedArray()
@@ -102,14 +115,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        mMap.setPadding(20, 30, 30, 340)
-        mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.setOnMarkerClickListener(this)
-
-    }
-
     private fun addMarker(position: LatLng, title: String) {
         mMap.addMarker(
             MarkerOptions()
@@ -122,6 +127,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 )!!
             )
         )
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom( position, 14f))
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

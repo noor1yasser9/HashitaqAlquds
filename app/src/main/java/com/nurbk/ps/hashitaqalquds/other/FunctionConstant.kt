@@ -2,6 +2,7 @@ package com.nurbk.ps.hashitaqalquds.other
 
 import android.app.*
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -12,6 +13,8 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.nurbk.ps.hashitaqalquds.databinding.ToolbarLayoutBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -110,6 +113,20 @@ fun generateColor(view: View, context: Context) {
     view.background = shape
 }
 
+
+fun stateTheme(context: Context, googleMap: GoogleMap) {
+    val nightModeFlags = context.resources.configuration.uiMode and
+            Configuration.UI_MODE_NIGHT_MASK
+    when (nightModeFlags) {
+        Configuration.UI_MODE_NIGHT_YES -> {
+            googleMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                    context, R.raw.style_json
+                )
+            )
+        }
+    }
+}
 
 
 

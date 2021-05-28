@@ -9,7 +9,8 @@
                     <solid android:color="@color/white" />
                 </shape>
             </item>
-            <item android:drawable="@drawable/ic_arrow_down" android:gravity="center_vertical|end" android:end="@dimen/_10sdp" />
+<!--            <item android:drawable="@drawable/ic_arrow_down" android:gravity="center_vertical|end" android:end="@dimen/_10sdp"-->
+                />
 
         </layer-list>
     </item>

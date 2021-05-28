@@ -23,6 +23,7 @@ import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarkDetailsBinding
 import com.nurbk.ps.hashitaqalquds.model.Landmark
 import com.nurbk.ps.hashitaqalquds.other.LANDMARK_KEY
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
+import com.nurbk.ps.hashitaqalquds.other.stateTheme
 import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
 import kotlinx.android.synthetic.main.view_custom_marker.view.*
 import javax.inject.Inject
@@ -85,6 +86,7 @@ class LandmarkDetailsFragment : Fragment(), GenericAdapter.OnListItemViewClickLi
         map.onCreate(savedInstanceState)
         map.onResume()
         map.getMapAsync { mMap ->
+            stateTheme(requireContext(), mMap)
             mMap.uiSettings.isScrollGesturesEnabled = false
             mMap.uiSettings.isZoomGesturesEnabled = false
             val mCustomMarkerView = (requireActivity().getSystemService(

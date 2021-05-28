@@ -42,9 +42,10 @@ class PostAdapter constructor() :
 
                 }
                 generateColor(header.txtNameLetter, root.context)
-                header.btnMore.isVisible = FirebaseAuth.getInstance().uid.toString() == post.userId
+//                header.btnMore.isVisible = FirebaseAuth.getInstance().uid.toString() == post.userId
                 action.commit.setOnClickListener { onClick.onClickItem(post, ACTION_COMMENT) }
                 action.btnComment.setOnClickListener { onClick.onClickItem(post, ACTION_COMMENT) }
+              btnPdf.setOnClickListener { onClick.onClickItem(post, ACTION_PDF) }
                 action.like.setOnClickListener {
                     onClick.onClickItem(post, ACTION_LIKE)
                     if (post.likes.contains(FirebaseAuth.getInstance().uid.toString())) {

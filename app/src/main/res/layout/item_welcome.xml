@@ -16,10 +16,11 @@
 
         <ImageView
             android:id="@+id/imageView6"
+            loadImageRec="@{welcome.image}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_230sdp"
             android:layout_marginTop="@dimen/_80sdp"
-            loadImageRec="@{welcome.image}"
+            android:backgroundTint="@color/logoColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +32,7 @@
             android:layout_margin="@dimen/_20ssp"
             android:gravity="center"
             android:text="@{welcome.title}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_18ssp"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
             app:layout_constraintStart_toStartOf="@+id/imageView6"

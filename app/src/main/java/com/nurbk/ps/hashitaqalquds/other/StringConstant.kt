@@ -20,6 +20,7 @@ const val CONTENT_TYPE = 4
 const val NULL_TYPE = 4
 
 const val ACTION_COMMENT = 1
+const val ACTION_PDF = 5
 const val ACTION_LIKE = 2
 const val ACTION_PROFILE = 3
 const val ACTION_MORE = 4

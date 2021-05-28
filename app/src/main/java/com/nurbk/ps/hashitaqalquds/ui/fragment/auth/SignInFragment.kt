@@ -52,7 +52,12 @@ class SignInFragment : Fragment() {
                         loadingDialog.show(requireActivity().supportFragmentManager, "")
                 }
                 Result.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
+                    try {
+
+                        loadingDialog.dismiss()
+                    }catch (e:Exception){
+
+                    }
                     findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
                 }
             }

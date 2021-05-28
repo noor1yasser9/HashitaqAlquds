@@ -23,7 +23,7 @@
             android:layout_marginVertical="@dimen/_60sdp"
             android:gravity="center"
             android:text="@string/title_splash"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_25ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

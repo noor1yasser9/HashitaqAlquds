@@ -68,6 +68,7 @@
             android:singleLine="true"
             android:text="@{post.formatDate()}"
             android:textAlignment="viewStart"
+            android:textColor="@color/textColor"
             app:layout_constraintBottom_toBottomOf="@+id/btnImage"
             app:layout_constraintEnd_toEndOf="@+id/txtName"
             app:layout_constraintStart_toStartOf="@+id/txtName"
@@ -78,10 +79,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_more"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/btnImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnImage"
-            app:tint="@color/black" />
+            app:tint="@color/textColor" />
 
         <TextView
             android:id="@+id/textView7"
@@ -89,9 +91,9 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_16sdp"
             android:ellipsize="end"
+            android:textColor="@color/textColor"
             android:paddingHorizontal="@dimen/_8sdp"
             android:text="@{post.content}"
-            android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="@+id/btnMore"
             app:layout_constraintStart_toStartOf="parent"

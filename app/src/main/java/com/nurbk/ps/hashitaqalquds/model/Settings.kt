@@ -11,10 +11,10 @@ fun getDataStings(context: Context) =
             R.drawable.ic_profile,
             context.getString(R.string.editProfile)
         ),
-        Settings(
-            R.drawable.ic_monito,
-            context.getString(R.string.theme)
-        ),
+//        Settings(
+//            R.drawable.ic_monito,
+//            context.getString(R.string.theme)
+//        ),
         Settings(
             R.drawable.ic_info,
             context.getString(R.string.aboutApp)

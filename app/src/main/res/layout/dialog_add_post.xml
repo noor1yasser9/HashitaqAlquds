@@ -35,6 +35,7 @@
                 android:paddingHorizontal="@dimen/_16sdp"
                 android:paddingTop="@dimen/_16sdp"
                 android:text="@string/selectHashtag"
+                android:textColor="@color/textColor"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +50,20 @@
                 android:background="@drawable/bg_selection"
                 android:entries="@array/data"
                 android:padding="@dimen/_8sdp"
+                android:pointerIcon="none"
                 app:layout_constraintEnd_toEndOf="@+id/textView4"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintBottom_toBottomOf="@+id/listHash"
+                app:layout_constraintStart_toStartOf="@+id/listHash"
+                app:layout_constraintTop_toTopOf="@+id/listHash" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout2"

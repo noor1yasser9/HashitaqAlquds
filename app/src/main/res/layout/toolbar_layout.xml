@@ -32,7 +32,6 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:translationY="-15sp"
-
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_100sdp"
                     android:scaleType="fitXY"
@@ -68,7 +67,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/tvTitle"
-                            app:tint="@color/black"
+                            app:tint="@color/textColor"
                             tools:visibility="visible" />
 
 
@@ -105,7 +104,7 @@
                                 android:layout_width="20sp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                app:tint="@color/black" />
+                                app:tint="@color/textColor" />
                         </androidx.cardview.widget.CardView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

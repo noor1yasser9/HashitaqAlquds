@@ -22,7 +22,8 @@
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/textColor" />
 
         <TextView
             android:layout_width="0dp"
@@ -31,7 +32,7 @@
             android:ellipsize="end"
             android:paddingHorizontal="@dimen/_8sdp"
             android:text="@{setting.name}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_22ssp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
             app:layout_constraintEnd_toStartOf="@+id/imageView9"
@@ -49,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black" />
+            app:tint="@color/textColor" />
 
         <View
             android:layout_width="match_parent"
