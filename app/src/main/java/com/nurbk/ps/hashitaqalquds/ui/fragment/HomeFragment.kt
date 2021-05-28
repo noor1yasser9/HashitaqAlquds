@@ -36,8 +36,8 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
         FragmentHomeBinding.inflate(layoutInflater)
     }
 
-    @Inject
-    lateinit var mAdapter: PostAdapter
+
+    private var mAdapter: PostAdapter = PostAdapter()
     private var isShowData = true
 
     override fun onCreateView(

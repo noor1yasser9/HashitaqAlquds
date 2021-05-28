@@ -137,7 +137,7 @@ fun addComment(){
         date = Calendar.getInstance().time.time,
         tag = post.tag, content = content, media = null, NULL_TYPE
     )
-    viewMode.addComment(post.id,comment)
+    viewMode.addComment(post,comment)
 }
 
     override fun onClickItem(itemViewModel: Post, type: Int, position: Int) {

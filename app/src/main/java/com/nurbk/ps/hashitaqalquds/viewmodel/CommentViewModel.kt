@@ -14,8 +14,8 @@ class CommentViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
 
-    fun addComment(postId: String, post: Post) {
-        postRepository.addComment(postId, post)
+    fun addComment(post: Post, comment: Post) {
+        postRepository.addComment(post,comment)
     }
 
     fun getComments(postId: String) {

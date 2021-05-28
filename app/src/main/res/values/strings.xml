@@ -42,6 +42,9 @@
     <string name="logOut">تسجل خروج</string>
 
 
+    <string name="main_channel">Notification Channel</string>
+    <string name="main_channel_description">Description Notification</string>
+
     <string-array name="data">
         <item>القدس_عاصمة_فلسطين</item>
         <item>انقذو_حي_الشيخ_جراح</item>
