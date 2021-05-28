@@ -24,6 +24,7 @@ import com.nurbk.ps.hashitaqalquds.model.Landmark
 import com.nurbk.ps.hashitaqalquds.other.LANDMARK_KEY
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
+import kotlinx.android.synthetic.main.view_custom_marker.view.*
 import javax.inject.Inject
 
 
@@ -55,7 +56,7 @@ class LandmarkDetailsFragment : Fragment(), GenericAdapter.OnListItemViewClickLi
             if (landmarks.latLng.isNotEmpty()) {
                 val location =
                     landmarks.latLng.split(",".toRegex()).toTypedArray()
-                viewMap(savedInstanceState, LatLng(location[0].toDouble(), location[1].toDouble()))
+                viewMap(savedInstanceState, LatLng(location[0].toDouble(), location[1].toDouble()),landmarks.name)
             }
 
         }
@@ -79,7 +80,7 @@ class LandmarkDetailsFragment : Fragment(), GenericAdapter.OnListItemViewClickLi
     override fun onClickItem(itemViewModel: String, type: Int, position: Int) {
     }
 
-    private fun viewMap(savedInstanceState: Bundle?, lcation: LatLng) {
+    private fun viewMap(savedInstanceState: Bundle?, location: LatLng,title: String) {
         val map = mBinding.mapView
         map.onCreate(savedInstanceState)
         map.onResume()
@@ -89,22 +90,23 @@ class LandmarkDetailsFragment : Fragment(), GenericAdapter.OnListItemViewClickLi
             val mCustomMarkerView = (requireActivity().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE
             ) as LayoutInflater).inflate(R.layout.view_custom_marker, null)
-            mMap.addMarker(MarkerOptions().position(lcation))!!.setIcon(
+            mMap.addMarker(MarkerOptions().position(location))!!.setIcon(
                 BitmapDescriptorFactory.fromBitmap(
                     getMarkerBitmapFromView(
-                        mCustomMarkerView
+                        mCustomMarkerView,title
                     )!!
                 )
             )
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lcation, 14f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 14f))
         }
     }
 
-    private fun getMarkerBitmapFromView(view: View): Bitmap? {
+    private fun getMarkerBitmapFromView(view: View,title:String): Bitmap? {
 //        mMarkerImageView.setImageBitmap(bitmap)
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
         view.buildDrawingCache()
+        view.txtTitle.text = title
         val returnedBitmap = Bitmap.createBitmap(
             view.measuredWidth, view.measuredHeight,
             Bitmap.Config.ARGB_8888
