@@ -62,9 +62,8 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
         }
 
-        pagerAdapter.addFragment(myLikeFragment, "")
-        //  myLikeFragment.addData(arrayListOf(Post()))
-        pagerAdapter.addFragment(myPostFragment, "")
+        pagerAdapter.addFragment(myLikeFragment)
+        pagerAdapter.addFragment(myPostFragment)
         mBinding.vpProfile.apply {
             adapter = pagerAdapter
         }
@@ -88,6 +87,7 @@ class ProfileFragment : Fragment() {
 
                 }
                 Result.Status.SUCCESS -> {
+                    Log.e("kkkkkkkkk",it.data.toString())
                     myPostFragment.addData(it.data as ArrayList<Post>)
                 }
             }
@@ -141,8 +141,7 @@ class ProfileFragment : Fragment() {
 
     inner class ScreenSlidePagerAdapter(fa: FragmentActivity) :
         FragmentStateAdapter(fa) {
-        private val lf: ArrayList<Fragment> = ArrayList()
-        private val lt: ArrayList<String> = ArrayList()
+        private val lf: ArrayList<Fragment> = arrayListOf()
 
         override fun createFragment(position: Int): Fragment {
             return lf[position]
@@ -152,9 +151,8 @@ class ProfileFragment : Fragment() {
             return lf.size
         }
 
-        fun addFragment(fragment: Fragment, title: String) {
+        fun addFragment(fragment: Fragment) {
             lf.add(fragment)
-            lt.add(title)
         }
 
     }

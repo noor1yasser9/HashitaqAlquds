@@ -178,13 +178,32 @@ class PostRepository @Inject constructor(
     fun getAllWhereUserId(userId: String) {
         getAllPostWhereUserIdLiveData.postValue(Result.loading(""))
         db.collection(COLLECTION_POST).whereEqualTo("userId", userId)
-            .orderBy("date", Query.Direction.DESCENDING).get()
-            .addOnFailureListener {
-                getAllPostWhereUserIdLiveData.postValue(Result.error(it.message, ""))
-            }.addOnSuccessListener {
-                val array = arrayListOf<Post>()
-                it.forEach { p -> array.add(p.toObject(Post::class.java)) }
-                getAllPostWhereUserIdLiveData.postValue(Result.success(array))
+            .orderBy("date", Query.Direction.DESCENDING)
+            .addSnapshotListener { value, error ->
+                if (error == null) {
+                    val array = ArrayList<Post>()
+                    value?.let {
+                        it.forEach { p ->
+                            val post: Post =
+                                p.toObject(Post::class.java)
+                            FirebaseFirestore.getInstance()
+                                .collection(COLLECTION_USERS)
+                                .document(post.userId)
+                                .addSnapshotListener { value1: DocumentSnapshot?, error1: FirebaseFirestoreException? ->
+                                    if (error1 == null) {
+                                        if (value1 != null)
+                                            post.users = (value1.toObject(User::class.java)!!)
+                                        array.add(post)
+                                        getAllPostWhereUserIdLiveData.postValue(Result.success(array))
+                                    }
+                                }
+                        }
+                    }
+                    if (value == null)
+                        getAllPostWhereUserIdLiveData.postValue(Result.empty(array))
+                } else {
+                    getAllPostWhereUserIdLiveData.postValue(Result.error(error.message, ""))
+                }
             }
     }
 
