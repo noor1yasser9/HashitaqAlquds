@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
         postRepository.addLike(postId, userArray)
     }
 
-    fun addComment(postId: String, post: Post) {
+    fun addComment(postId: Post, post: Post) {
         postRepository.addComment(postId, post)
     }
 

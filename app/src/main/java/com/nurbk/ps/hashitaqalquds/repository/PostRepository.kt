@@ -30,10 +30,10 @@ import kotlin.collections.ArrayList
 
 @Singleton
 class PostRepository @Inject constructor(
-    val notificationInterface: NotificationInterface,
 
-    ) {
-
+) {
+    @Inject
+    lateinit var notificationInterface: NotificationRepository
 
     private val insertPostLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
     private val updatePostLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
@@ -132,7 +132,7 @@ class PostRepository @Inject constructor(
         db.collection(COLLECTION_POST).document(post.id).collection(COMMENT_POST).add(comment)
             .addOnFailureListener {
                 addCommentLiveData.postValue(Result.error(it.message, ""))
-                sendRemoteMessage(
+                notificationInterface.sendRemoteMessage(
                     NotificationParent(
                         to = post.users.token,
                         data = NotificationData(post = post, comment = comment)
@@ -309,32 +309,6 @@ class PostRepository @Inject constructor(
 
 
     private val notificationMutableLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
-
-
-    fun sendRemoteMessage(notification: NotificationParent) {
-
-        CoroutineScope(Dispatchers.IO).launch {
-            notificationMutableLiveData.postValue(Result.loading("loading"))
-            val response = notificationInterface.sendRemoteMessage(notification)
-            withContext(Dispatchers.Main) {
-                try {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            notificationMutableLiveData.postValue(Result.success(it))
-                        }
-
-                    } else {
-                        notificationMutableLiveData.postValue(Result.success("Ooops: ${response.errorBody()}"))
-                    }
-                } catch (e: HttpException) {
-                    notificationMutableLiveData.postValue(Result.success("Ooops: ${e.message()}"))
-
-                } catch (t: Throwable) {
-                    notificationMutableLiveData.postValue(Result.success("Ooops: ${t.message}"))
-                }
-            }
-        }
-    }
 
 
     val notificationPostGetLiveData get() = notificationMutableLiveData

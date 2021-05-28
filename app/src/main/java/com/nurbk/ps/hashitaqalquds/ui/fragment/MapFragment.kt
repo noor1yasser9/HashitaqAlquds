@@ -24,6 +24,8 @@ import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
 import com.nurbk.ps.hashitaqalquds.viewmodel.MapViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_sign_in.view.*
+import kotlinx.android.synthetic.main.view_custom_marker.view.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -94,6 +96,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 //        mMarkerImageView.setImageBitmap(bitmap)
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+        view.txtName.setText("asdfasdfasdf")
         view.buildDrawingCache()
         val returnedBitmap = Bitmap.createBitmap(
             view.measuredWidth, view.measuredHeight,
