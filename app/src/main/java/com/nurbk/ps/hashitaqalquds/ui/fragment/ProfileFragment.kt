@@ -1,6 +1,7 @@
 package com.nurbk.ps.hashitaqalquds.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +25,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(){
+class ProfileFragment : Fragment() {
     private val TAG: String = ProfileFragment::class.java.name
     private var loading: String? = null
-    private  val myPostFragment = PostProfileFragment()
-    private  val myLikeFragment = PostProfileFragment()
+    private val myPostFragment = PostProfileFragment()
+    private val myLikeFragment = PostProfileFragment()
 
     @Inject
     lateinit var viewModel: ProfileViewModel
@@ -61,9 +62,9 @@ class ProfileFragment : Fragment(){
             findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
         }
 
-        pagerAdapter.addFragment(myLikeFragment,"")
-      //  myLikeFragment.addData(arrayListOf(Post()))
-        pagerAdapter.addFragment(myPostFragment,"")
+        pagerAdapter.addFragment(myLikeFragment, "")
+        //  myLikeFragment.addData(arrayListOf(Post()))
+        pagerAdapter.addFragment(myPostFragment, "")
         mBinding.vpProfile.apply {
             adapter = pagerAdapter
         }
@@ -77,7 +78,7 @@ class ProfileFragment : Fragment(){
         }.attach()
 
         viewModel.getAllPostWhereUserId(mAuth.uid.toString())
-        viewModel.getAllPostWhereUserIdGetLiveData.observe(viewLifecycleOwner){
+        viewModel.getAllPostWhereUserIdGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
                 }
@@ -91,8 +92,9 @@ class ProfileFragment : Fragment(){
                 }
             }
         }
+
         viewModel.getPostLikeUser(mAuth.uid.toString())
-        viewModel.getPostLikesGetLiveData.observe(viewLifecycleOwner){
+        viewModel.getPostLikesGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
                 }
@@ -102,7 +104,10 @@ class ProfileFragment : Fragment(){
 
                 }
                 Result.Status.SUCCESS -> {
-                    myLikeFragment.addData(it.data as ArrayList<Post>)
+                    val data = it.data as ArrayList<Post>
+                    myLikeFragment.addData(data)
+                    myLikeFragment.mAdapter.notifyDataSetChanged()
+                    Log.e("ttttttttttttttt", data.size.toString())
                 }
             }
         }

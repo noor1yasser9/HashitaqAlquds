@@ -13,7 +13,7 @@ class ProfileViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
     fun update(id: String, user: Map<String, Any>) {
-        userRepository.update(id, user){}
+        userRepository.update(id, user) {}
     }
 
     fun getWhereId(id: String) {
@@ -30,11 +30,12 @@ class ProfileViewModel @Inject constructor(
     fun getAllPostWhereUserId(userId: String) =
         postRepository.getAllWhereUserId(userId)
 
-    fun getPostLikeUser(userId:String){
+    fun getPostLikeUser(userId: String) {
         postRepository.getPostLikeUser(userId)
     }
 
     val getAllPostWhereUserIdGetLiveData get() = postRepository.getAllPostWhereUserIdGetLiveData
+    val getAllActionWhereUserIdGetLiveData get() = postRepository.getAllPostWhereUserIdGetLiveData
     val getWhereIdGetLiveData get() = userRepository.getWhereIdGetLiveData
     val updateGetLiveData get() = userRepository.updateGetLiveData
     val getPostLikesGetLiveData get() = postRepository.getPostLikesGetLiveData

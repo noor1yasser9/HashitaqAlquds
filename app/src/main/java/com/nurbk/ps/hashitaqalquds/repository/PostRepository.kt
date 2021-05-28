@@ -86,7 +86,7 @@ class PostRepository @Inject constructor() {
 
     fun getPostLikeUser(userId: String) {
         getPostLikesLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).whereEqualTo(FIELD_LIKE, userId)
+        db.collection(COLLECTION_POST).whereArrayContains(FIELD_LIKE, userId)
             .addSnapshotListener { value, error ->
                 if (error == null) {
                     val array = ArrayList<Post>()
@@ -128,7 +128,7 @@ class PostRepository @Inject constructor() {
 
     fun getAllPosts() {
         getAllPostsLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).orderBy("date", Query.Direction.ASCENDING)
+        db.collection(COLLECTION_POST).orderBy("date", Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
                 if (error == null) {
                     val array = ArrayList<Post>()
@@ -159,7 +159,8 @@ class PostRepository @Inject constructor() {
 
     fun getAllWhereUserId(userId: String) {
         getAllPostWhereUserIdLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).whereEqualTo("userId", userId).get()
+        db.collection(COLLECTION_POST).whereEqualTo("userId", userId)
+            .orderBy("date", Query.Direction.DESCENDING).get()
             .addOnFailureListener {
                 getAllPostWhereUserIdLiveData.postValue(Result.error(it.message, ""))
             }.addOnSuccessListener {

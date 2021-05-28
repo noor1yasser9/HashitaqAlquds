@@ -22,7 +22,7 @@ import com.nurbk.ps.hashitaqalquds.other.*
 import javax.inject.Inject
 
 
-class PostAdapter @Inject constructor(val glide: RequestManager) :
+class PostAdapter constructor() :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     lateinit var onClick: OnListItemViewClickListener
 
