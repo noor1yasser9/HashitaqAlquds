@@ -47,7 +47,6 @@ class SettingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<S
             isMane = false,
             idMenu = 0
         ) {
-            if (it == TWO)
                 findNavController().popBackStack()
         }
 

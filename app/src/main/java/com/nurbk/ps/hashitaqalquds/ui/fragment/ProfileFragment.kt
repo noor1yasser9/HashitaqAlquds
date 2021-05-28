@@ -20,6 +20,7 @@ import com.nurbk.ps.hashitaqalquds.model.User
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.Result
+import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
 import com.nurbk.ps.hashitaqalquds.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: ProfileViewModel
+
     private val mAuth by lazy {
         FirebaseAuth.getInstance()
     }
@@ -138,7 +140,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
     inner class ScreenSlidePagerAdapter(fa: FragmentActivity) :
         FragmentStateAdapter(fa) {
         private val lf: ArrayList<Fragment> = arrayListOf()
@@ -154,7 +155,6 @@ class ProfileFragment : Fragment() {
         fun addFragment(fragment: Fragment) {
             lf.add(fragment)
         }
-
     }
 
 }
