@@ -159,7 +159,11 @@
     <fragment
         android:id="@+id/landmarksFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.LandmarksFragment"
-        android:label="LandmarksFragment" />
+        android:label="LandmarksFragment" >
+        <action
+            android:id="@+id/action_landmarksFragment_to_landmarkDetailsFragment"
+            app:destination="@id/landmarkDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/commentFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.CommentFragment"
