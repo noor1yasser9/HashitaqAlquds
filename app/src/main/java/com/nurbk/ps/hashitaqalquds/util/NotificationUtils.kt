@@ -80,34 +80,57 @@ object NotificationUtils {
         builder.setContentIntent(resultPendingIntent)
         builder.setAutoCancel(true)
         builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-        Glide.with(context)
-            .asBitmap()
-            .load(image)
-            .fitCenter()
-            .into(object : CustomTarget<Bitmap>() {
-               override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    val pBuilder1 = Person.Builder()
-                    pBuilder1.setIcon(IconCompat.createWithBitmap(resource))
-                    pBuilder1.setName(name)
-                    pBuilder1.setKey(id)
-                    val message = NotificationCompat.MessagingStyle.Message(
-                        body,
-                        System.currentTimeMillis(),
-                        pBuilder1.build()
-                    )
-                    builder.setStyle(
-                        NotificationCompat.MessagingStyle(pBuilder1.build())
-                            .addMessage(message)
-                    )
-                    val notificationManagerCompat = NotificationManagerCompat.from(context)
-                    notificationManagerCompat.notify(
-                        System.currentTimeMillis().toInt(),
-                        builder.build()
-                    )
-                }
+        if (image.isNullOrEmpty()) {
+            val pBuilder1 = Person.Builder()
+            pBuilder1.setName(name)
+            pBuilder1.setKey(id)
+            val message = NotificationCompat.MessagingStyle.Message(
+                body,
+                System.currentTimeMillis(),
+                pBuilder1.build()
+            )
+            builder.setStyle(
+                NotificationCompat.MessagingStyle(pBuilder1.build())
+                    .addMessage(message)
+            )
+            val notificationManagerCompat = NotificationManagerCompat.from(context)
+            notificationManagerCompat.notify(
+                System.currentTimeMillis().toInt(),
+                builder.build()
+            )
+        } else
+            Glide.with(context)
+                .asBitmap()
+                .load(image)
+                .fitCenter()
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        val pBuilder1 = Person.Builder()
+                        pBuilder1.setIcon(IconCompat.createWithBitmap(resource))
+                        pBuilder1.setName(name)
+                        pBuilder1.setKey(id)
+                        val message = NotificationCompat.MessagingStyle.Message(
+                            body,
+                            System.currentTimeMillis(),
+                            pBuilder1.build()
+                        )
+                        builder.setStyle(
+                            NotificationCompat.MessagingStyle(pBuilder1.build())
+                                .addMessage(message)
+                        )
+                        val notificationManagerCompat = NotificationManagerCompat.from(context)
+                        notificationManagerCompat.notify(
+                            System.currentTimeMillis().toInt(),
+                            builder.build()
+                        )
+                    }
 
-                override fun onLoadCleared(placeholder: Drawable?) {}
-            })
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
     }
+
 
 }

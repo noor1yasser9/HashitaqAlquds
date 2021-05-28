@@ -58,7 +58,6 @@ class NotificationServiceFirebase : FirebaseMessagingService() {
                     users?.image,
                     idN
                 )
-                Log.e("ttttttttttttt", users.toString())
             }.addOnFailureListener { e: Exception? -> }
     }
 
