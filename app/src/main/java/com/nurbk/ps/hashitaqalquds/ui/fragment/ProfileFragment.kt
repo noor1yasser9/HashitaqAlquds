@@ -106,8 +106,6 @@ class ProfileFragment : Fragment() {
                 Result.Status.SUCCESS -> {
                     val data = it.data as ArrayList<Post>
                     myLikeFragment.addData(data)
-                    myLikeFragment.mAdapter.notifyDataSetChanged()
-                    Log.e("ttttttttttttttt", data.size.toString())
                 }
             }
         }

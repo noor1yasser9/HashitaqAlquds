@@ -8,37 +8,34 @@ import androidx.fragment.app.Fragment
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
-import com.nurbk.ps.hashitaqalquds.adapter.PostAdapter
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentPostProfileBinding
 import com.nurbk.ps.hashitaqalquds.model.Post
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class PostProfileFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<Post> {
-    var array: ArrayList<Post> = arrayListOf()
-    fun addData(posts: ArrayList<Post>) {
-        array = (posts)
+class PostProfileFragment :Fragment(),GenericAdapter.OnListItemViewClickListener<Post> {
+    val array:ArrayList<Post> = arrayListOf()
+    fun addData (posts:ArrayList<Post>){
+        array.clear()
+        array.addAll(posts)
         mAdapter.notifyDataSetChanged()
-
     }
-
     private val mBinding by lazy {
         FragmentPostProfileBinding.inflate(layoutInflater)
     }
 
-    var mAdapter: PostAdapter = PostAdapter()
-
+    private val mAdapter by lazy {
+        GenericAdapter(R.layout.item_post_image,BR.post,this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = mBinding.root
+    )=mBinding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAdapter.data = array
-        mAdapter.notifyDataSetChanged()
         mBinding.rcPost.apply {
             adapter = mAdapter
         }

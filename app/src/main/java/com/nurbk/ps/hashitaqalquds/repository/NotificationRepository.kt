@@ -1,5 +1,6 @@
 package com.nurbk.ps.hashitaqalquds.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.nurbk.ps.hashitaqalquds.model.NotificationParent
 import com.nurbk.ps.hashitaqalquds.network.NotificationInterface
@@ -20,7 +21,7 @@ class NotificationRepository @Inject constructor(
 
 
     fun sendRemoteMessage(notification: NotificationParent) {
-
+        Log.e("ttttttttttttsdfsdf", notification.data.toString())
         CoroutineScope(Dispatchers.IO).launch {
             notificationMutableLiveData.postValue(Result.loading("loading"))
             val response = notificationInterface.sendRemoteMessage(notification)
@@ -29,15 +30,18 @@ class NotificationRepository @Inject constructor(
                     if (response.isSuccessful) {
                         response.body()?.let {
                             notificationMutableLiveData.postValue(Result.success(it))
+                            Log.e("ttttttt", it.toString())
                         }
 
                     } else {
                         notificationMutableLiveData.postValue(Result.success("Ooops: ${response.errorBody()}"))
                     }
                 } catch (e: HttpException) {
+                    Log.e("ttttttt", e.message().toString())
                     notificationMutableLiveData.postValue(Result.success("Ooops: ${e.message()}"))
 
                 } catch (t: Throwable) {
+                    Log.e("ttttttt", t.message.toString())
                     notificationMutableLiveData.postValue(Result.success("Ooops: ${t.message}"))
                 }
             }

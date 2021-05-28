@@ -132,14 +132,15 @@ class PostRepository @Inject constructor(
         db.collection(COLLECTION_POST).document(post.id).collection(COMMENT_POST).add(comment)
             .addOnFailureListener {
                 addCommentLiveData.postValue(Result.error(it.message, ""))
+
+            }.addOnSuccessListener {
+                addCommentLiveData.postValue(Result.success(it))
                 notificationInterface.sendRemoteMessage(
                     NotificationParent(
                         to = post.users.token,
                         data = NotificationData(post = post, comment = comment)
                     )
                 )
-            }.addOnSuccessListener {
-                addCommentLiveData.postValue(Result.success(it))
             }
     }
 

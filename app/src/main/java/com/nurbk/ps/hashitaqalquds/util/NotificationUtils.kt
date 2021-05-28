@@ -18,7 +18,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.ui.activity.MainActivity
 
-class NotificationUtils {
+object NotificationUtils {
 
     private val MAIN_CHANNEL_ID = "main_channel_id"
 
