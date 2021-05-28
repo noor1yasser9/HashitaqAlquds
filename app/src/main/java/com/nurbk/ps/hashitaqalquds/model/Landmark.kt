@@ -9,5 +9,5 @@ data class Landmark(
     val name: String = "",
     val description: String = "",
     val images: ArrayList<String> = arrayListOf(),
-    val location: String = ""
+    val latLng: String = ""
 ):Parcelable
