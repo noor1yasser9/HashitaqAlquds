@@ -1,34 +1,47 @@
 package com.nurbk.ps.hashitaqalquds.ui.fragment
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarkDetailsBinding
-import com.nurbk.ps.hashitaqalquds.databinding.FragmentLandmarksBinding
 import com.nurbk.ps.hashitaqalquds.model.Landmark
+import com.nurbk.ps.hashitaqalquds.other.LANDMARK_KEY
 import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 import com.nurbk.ps.hashitaqalquds.viewmodel.LandmarkViewModel
 import javax.inject.Inject
 
 
-class LandmarkDetailsFragment : Fragment(),GenericAdapter.OnListItemViewClickListener<String> {
+class LandmarkDetailsFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<String> {
 
     @Inject
     lateinit var viewModel: LandmarkViewModel
 
-    private lateinit var landmarks : Landmark
-    private val mBinding by lazy{
+    private lateinit var landmarks: Landmark
+    private lateinit var mMap: MapView
+    private val mBinding by lazy {
 
         FragmentLandmarkDetailsBinding.inflate(layoutInflater)
     }
     private val mAdapter by lazy {
         GenericAdapter(R.layout.item_landmark_image, BR.uri, this)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,17 +49,25 @@ class LandmarkDetailsFragment : Fragment(),GenericAdapter.OnListItemViewClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        landmarks = Landmark()
-        requireArguments().getParcelable<Landmark>("")?.let {
+        requireArguments().getParcelable<Landmark>(LANDMARK_KEY)?.let {
             landmarks = it
+            mBinding.landmark = it
+            if (landmarks.latLng.isNotEmpty()) {
+                val location =
+                    landmarks.latLng.split(",".toRegex()).toTypedArray()
+                viewMap(savedInstanceState, LatLng(location[0].toDouble(), location[1].toDouble()))
+            }
+
         }
 
         requireActivity().setToolbarView(
             mBinding.toolbarView,
             title = landmarks.name,
             isMane = false,
-            idMenu = R.drawable.ic_add
-        ){}
+            idMenu = 0
+        ) {
+            findNavController().popBackStack()
+        }
 
         mAdapter.data = landmarks.images
         mBinding.vpImage.apply {
@@ -58,4 +79,41 @@ class LandmarkDetailsFragment : Fragment(),GenericAdapter.OnListItemViewClickLis
     override fun onClickItem(itemViewModel: String, type: Int, position: Int) {
     }
 
+    private fun viewMap(savedInstanceState: Bundle?, lcation: LatLng) {
+        val map = mBinding.mapView
+        map.onCreate(savedInstanceState)
+        map.onResume()
+        map.getMapAsync { mMap ->
+            mMap.uiSettings.isScrollGesturesEnabled = false
+            mMap.uiSettings.isZoomGesturesEnabled = false
+            val mCustomMarkerView = (requireActivity().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE
+            ) as LayoutInflater).inflate(R.layout.view_custom_marker, null)
+            mMap.addMarker(MarkerOptions().position(lcation))!!.setIcon(
+                BitmapDescriptorFactory.fromBitmap(
+                    getMarkerBitmapFromView(
+                        mCustomMarkerView
+                    )!!
+                )
+            )
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lcation, 14f))
+        }
+    }
+
+    private fun getMarkerBitmapFromView(view: View): Bitmap? {
+//        mMarkerImageView.setImageBitmap(bitmap)
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+        view.buildDrawingCache()
+        val returnedBitmap = Bitmap.createBitmap(
+            view.measuredWidth, view.measuredHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(returnedBitmap)
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN)
+        val drawable = view.background
+        drawable?.draw(canvas)
+        view.draw(canvas)
+        return returnedBitmap
+    }
 }
