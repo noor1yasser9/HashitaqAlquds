@@ -104,27 +104,16 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
             }
             ACTION_LIKE -> {
                 val uid = FirebaseAuth.getInstance().uid.toString()
-                if (post.likes.contains(uid))
+                if (post.likes.contains(uid)) {
                     post.likes.remove(uid)
-                else
+                    viewModel.addAction(post, true)
+                } else {
                     post.likes.add(uid)
+                    viewModel.addAction(post, false)
+                }
                 viewModel.update(post.id, mapOf("likes" to post.likes))
             }
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.e("tttttttt", "onStop")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.e("tttttttttttt", "onDetach")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e("tttttt", "onDetroy")
-    }
 }

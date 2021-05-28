@@ -6,7 +6,6 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -14,7 +13,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.R
@@ -55,7 +53,6 @@ class PostAdapter @Inject constructor(val glide: RequestManager) :
                     } else {
                         action.btnLike.setTextColor(Color.BLACK)
                         setTextViewDrawableColor(root.context, action.btnLike, R.color.black);
-
                     }
                 }
                 action.btnLike.setOnClickListener {
@@ -66,7 +63,6 @@ class PostAdapter @Inject constructor(val glide: RequestManager) :
                     } else {
                         action.btnLike.setTextColor(Color.BLACK)
                         setTextViewDrawableColor(root.context, action.btnLike, R.color.black);
-
                     }
                 }
                 header.btnImage.setOnClickListener { onClick.onClickItem(post, ACTION_PROFILE) }

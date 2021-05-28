@@ -18,9 +18,8 @@ class HomeViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
 
-
     fun update(postId: String, post: Map<String, Any>) {
-        postRepository.update(postId, post){}
+        postRepository.update(postId, post) {}
     }
 
     fun deletePost(postId: String) {
@@ -41,6 +40,11 @@ class HomeViewModel @Inject constructor(
 
     fun getLikes(postId: String) {
         postRepository.getLikes(postId)
+    }
+
+
+    fun addAction(post: Post, isExists: Boolean) {
+        postRepository.addAction(post, isExists)
     }
 
     fun getComments(postId: String) {

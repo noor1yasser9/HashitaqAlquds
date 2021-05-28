@@ -30,6 +30,7 @@ const val REQUEST_FILE_CODE = 3
 
 const val COLLECTION_POST = "posts"
 const val COLLECTION_USERS = "users"
+const val COLLECTION_ACTION = "action"
 const val PREFERENCES_NAME = "FileName"
 const val USER_PROFILE = "UserProfile"
 const val IS_LOGIN = "isLogin"
