@@ -59,7 +59,7 @@ class PostRepository @Inject constructor() {
             onComplete()
             updatePostLiveData.postValue(Result.error(it.message, ""))
         }.addOnSuccessListener {
-            updatePostLiveData.postValue(Result.success(it))
+            updatePostLiveData.postValue(Result.success(""))
         }
     }
 

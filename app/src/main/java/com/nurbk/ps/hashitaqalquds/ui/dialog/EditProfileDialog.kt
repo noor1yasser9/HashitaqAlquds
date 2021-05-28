@@ -83,7 +83,7 @@ class EditProfileDialog : BottomSheetDialogFragment() {
 
                 }
                 Result.Status.SUCCESS -> {
-                    dismiss()
+//                    dismiss()
                 }
             }
         }

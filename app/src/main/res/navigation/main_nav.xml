@@ -114,18 +114,22 @@
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
     </fragment>
+
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.auth.SignUpFragment"
         android:label="SignUpFragment" />
+
     <dialog
         android:id="@+id/dialogAddPost"
         android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.DialogAddPost"
         android:label="DialogAddPost" />
+
     <dialog
         android:id="@+id/editProfileDialog"
         android:name="com.nurbk.ps.hashitaqalquds.ui.dialog.EditProfileDialog"
         android:label="EditProfileDialog" />
+
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.nurbk.ps.hashitaqalquds.ui.fragment.SettingFragment"

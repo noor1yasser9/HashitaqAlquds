@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
@@ -37,7 +38,7 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
 
     @Inject
     lateinit var mAdapter: PostAdapter
-
+    private var isShowData = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +65,7 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
             addItemDecoration(MemberItemDecoration());
         }
 
-
+        isShowData = true
         viewModel.getAllPostsGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
@@ -82,7 +83,9 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
                     } catch (e: Exception) {
                     }
                     val data = it.data as ArrayList<Post>
-                    mAdapter.data = data
+                    if (isShowData)
+                        mAdapter.data = data
+                    isShowData = false
                 }
             }
         }
@@ -100,7 +103,28 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_commentFragment, bundle)
             }
             ACTION_LIKE -> {
+                val uid = FirebaseAuth.getInstance().uid.toString()
+                if (post.likes.contains(uid))
+                    post.likes.remove(uid)
+                else
+                    post.likes.add(uid)
+                viewModel.update(post.id, mapOf("likes" to post.likes))
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("tttttttt", "onStop")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.e("tttttttttttt", "onDetach")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("tttttt", "onDetroy")
     }
 }
