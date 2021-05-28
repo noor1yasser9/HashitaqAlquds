@@ -133,7 +133,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 //        mMarkerImageView.setImageBitmap(bitmap)
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-        view.txtName.setText("asdfasdfasdf")
+        view.txtTitle.setText("asdfasdfasdf")
         view.buildDrawingCache()
         val returnedBitmap = Bitmap.createBitmap(
             view.measuredWidth, view.measuredHeight,
