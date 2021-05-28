@@ -86,13 +86,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     }
                     if (isShowData) {
                         (it.data as ArrayList<Landmark>).forEach { landmark ->
-                            if(landmark.latLng.isNotEmpty()){
-                            val location =
-                                landmark.latLng.split(",".toRegex()).toTypedArray()
-                            addMarker(
-                                LatLng(location[0].toDouble(), location[1].toDouble()),
-                                landmark.name
-                            )
+                            if (landmark.latLng.isNotEmpty()) {
+                                val location =
+                                    landmark.latLng.split(",".toRegex()).toTypedArray()
+                                addMarker(
+                                    LatLng(location[0].toDouble(), location[1].toDouble()),
+                                    landmark.name
+                                )
                             }
                         }
                     }
@@ -118,22 +118,22 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         )!!.setIcon(
             BitmapDescriptorFactory.fromBitmap(
                 getMarkerBitmapFromView(
-                    mCustomMarkerView
+                    mCustomMarkerView, title
                 )!!
             )
         )
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        Log.e("kkkkkk",marker.title!!)
+        Log.e("kkkkkk", marker.title!!)
         return false
     }
 
-    private fun getMarkerBitmapFromView(view: View): Bitmap? {
+    private fun getMarkerBitmapFromView(view: View, title: String): Bitmap? {
 //        mMarkerImageView.setImageBitmap(bitmap)
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-        view.txtTitle.setText("asdfasdfasdf")
+        view.txtTitle.text = title
         view.buildDrawingCache()
         val returnedBitmap = Bitmap.createBitmap(
             view.measuredWidth, view.measuredHeight,
