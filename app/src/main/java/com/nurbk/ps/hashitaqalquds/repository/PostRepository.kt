@@ -11,17 +11,28 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import com.nurbk.ps.hashitaqalquds.model.NotificationData
+import com.nurbk.ps.hashitaqalquds.model.NotificationParent
 import com.nurbk.ps.hashitaqalquds.model.Post
 import com.nurbk.ps.hashitaqalquds.model.User
+import com.nurbk.ps.hashitaqalquds.network.NotificationInterface
 import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.util.Result
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.collections.ArrayList
 
 @Singleton
-class PostRepository @Inject constructor() {
+class PostRepository @Inject constructor(
+    val notificationInterface: NotificationInterface,
+
+    ) {
 
 
     private val insertPostLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
@@ -116,11 +127,17 @@ class PostRepository @Inject constructor() {
     }
 
 
-    fun addComment(postId: String, post: Post) {
+    fun addComment(post: Post, comment: Post) {
         addCommentLiveData.postValue(Result.loading(""))
-        db.collection(COLLECTION_POST).document(postId).collection(COMMENT_POST).add(post)
+        db.collection(COLLECTION_POST).document(post.id).collection(COMMENT_POST).add(comment)
             .addOnFailureListener {
                 addCommentLiveData.postValue(Result.error(it.message, ""))
+                sendRemoteMessage(
+                    NotificationParent(
+                        to = post.users.token,
+                        data = NotificationData(post = post, comment = comment)
+                    )
+                )
             }.addOnSuccessListener {
                 addCommentLiveData.postValue(Result.success(it))
             }
@@ -289,5 +306,37 @@ class PostRepository @Inject constructor() {
     init {
         getAllPosts()
     }
+
+
+    private val notificationMutableLiveData: MutableLiveData<Result<Any>> = MutableLiveData()
+
+
+    fun sendRemoteMessage(notification: NotificationParent) {
+
+        CoroutineScope(Dispatchers.IO).launch {
+            notificationMutableLiveData.postValue(Result.loading("loading"))
+            val response = notificationInterface.sendRemoteMessage(notification)
+            withContext(Dispatchers.Main) {
+                try {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            notificationMutableLiveData.postValue(Result.success(it))
+                        }
+
+                    } else {
+                        notificationMutableLiveData.postValue(Result.success("Ooops: ${response.errorBody()}"))
+                    }
+                } catch (e: HttpException) {
+                    notificationMutableLiveData.postValue(Result.success("Ooops: ${e.message()}"))
+
+                } catch (t: Throwable) {
+                    notificationMutableLiveData.postValue(Result.success("Ooops: ${t.message}"))
+                }
+            }
+        }
+    }
+
+
+    val notificationPostGetLiveData get() = notificationMutableLiveData
 
 }
