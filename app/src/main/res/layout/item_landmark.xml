@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
-        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +27,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/_16sdp"
                 android:scaleType="centerCrop"
+
                 uriImage="@{landmark.images[0]}"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintDimensionRatio="1:1"

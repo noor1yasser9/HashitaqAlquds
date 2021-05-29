@@ -21,7 +21,7 @@
     <string name="name">الاسم كامل</string>
     <string name="password">كلمة السر</string>
     <string name="forGotPassword">هل نسيت كلمة المرور ؟</string>
-    <string name="createAccount">لا يوجد عندك حساب؟ يمكنك انشاء حساب</string>
+    <string name="createAccount">لا يوجد لديك حساب؟ يمكنك انشاء حساب</string>
     <string name="doYouHaveAccount">هل يوجد لديك حساب؟ قم بتسجل دخول</string>
     <string name="addPost">نشر منشور</string>
     <string name="selectHashtag">اختر هشتاق</string>
