@@ -128,5 +128,7 @@ fun stateTheme(context: Context, googleMap: GoogleMap) {
     }
 }
 
-
+interface OnShowSnack{
+    fun onShowSnack()
+}
 

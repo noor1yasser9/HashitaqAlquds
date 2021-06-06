@@ -35,6 +35,8 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = mBinding.root
 
+    private var isLoading = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,17 +50,20 @@ class SignInFragment : Fragment() {
                     loadingDialog.dismiss()
                 }
                 Result.Status.LOADING -> {
+                    isLoading = true
                     if (!loadingDialog.isAdded)
                         loadingDialog.show(requireActivity().supportFragmentManager, "")
                 }
                 Result.Status.SUCCESS -> {
-                    try {
+                    if (isLoading) {
+                        try {
 
-                        loadingDialog.dismiss()
-                    }catch (e:Exception){
+                            loadingDialog.dismiss()
+                        } catch (e: Exception) {
 
+                        }
+                        findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
                     }
-                    findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
                 }
             }
 
@@ -69,6 +74,9 @@ class SignInFragment : Fragment() {
 
         mBinding.createSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_SignInFragment_to_signUpFragment)
+        }
+        mBinding.btnGaset.setOnClickListener {
+            findNavController().navigate(R.id.action_LoginFragment_to_homeFragment)
         }
 
     }

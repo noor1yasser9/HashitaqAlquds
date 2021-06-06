@@ -1,5 +1,6 @@
 package com.nurbk.ps.hashitaqalquds.ui.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
@@ -21,6 +23,7 @@ import com.nurbk.ps.hashitaqalquds.model.getData
 import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.MemberItemDecoration
+import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +39,15 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
 
     private val mBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
+    }
+
+    lateinit var onShowSnack: OnShowSnack
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnShowSnack)
+            onShowSnack = context
+
     }
 
 
@@ -59,7 +71,11 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
             isMane = true,
             idMenu = R.drawable.ic_add
         ) {
-            findNavController().navigate(R.id.action_homeFragment_to_dialogAddPost)
+            if (PreferencesManager(requireContext()).isLogin) {
+                findNavController().navigate(R.id.action_homeFragment_to_dialogAddPost)
+            } else {
+                onShowSnack.onShowSnack()
+            }
         }
 
         mBinding.rcData.apply {
@@ -110,17 +126,23 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_commentFragment, bundle)
             }
             ACTION_LIKE -> {
-                val uid = FirebaseAuth.getInstance().uid.toString()
-                if (post.likes.contains(uid)) {
-                    post.likes.remove(uid)
-                    viewModel.addAction(post, true)
+                if (PreferencesManager(requireContext()).isLogin) {
+                    val uid = FirebaseAuth.getInstance().uid.toString()
+                    if (post.likes.contains(uid)) {
+                        post.likes.remove(uid)
+                        viewModel.addAction(post, true)
+                    } else {
+                        post.likes.add(uid)
+                        viewModel.addAction(post, false)
+                    }
+                    viewModel.update(post.id, mapOf("likes" to post.likes))
                 } else {
-                    post.likes.add(uid)
-                    viewModel.addAction(post, false)
+                    onShowSnack.onShowSnack()
                 }
-                viewModel.update(post.id, mapOf("likes" to post.likes))
+
             }
         }
     }
+
 
 }

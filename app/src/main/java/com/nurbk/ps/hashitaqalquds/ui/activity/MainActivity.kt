@@ -8,16 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import cn.jzvd.JZVideoPlayer
+import com.google.android.material.snackbar.Snackbar
 import com.nurbk.ps.hashitaqalquds.R
 import com.nurbk.ps.hashitaqalquds.databinding.ActivityMainBinding
+import com.nurbk.ps.hashitaqalquds.other.OnShowSnack
+import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),OnShowSnack {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var navHostFragment: Fragment
@@ -46,21 +50,34 @@ class MainActivity : AppCompatActivity() {
         mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.profileFragment -> {
-                    if (item.itemId != id)
-                        navController.navigate(R.id.profileFragment, null, getNavOptions())
+                    if (PreferencesManager(this).isLogin) {
+                        if (item.itemId != id)
+                            navController.navigate(R.id.profileFragment, null, getNavOptions())
+                        id = item.itemId
 
+                    } else {
+
+                    }
                 }
                 R.id.homeFragment -> {
-                    if (item.itemId != id)
+                    if (item.itemId != id) {
                         navController.navigate(R.id.homeFragment, null, getNavOptions())
+                        id = item.itemId
+                    }
                 }
                 R.id.mapFragment -> {
-                    if (item.itemId != id)
+
+                    if (item.itemId != id) {
                         navController.navigate(R.id.mapFragment, null, getNavOptions())
+                        id = item.itemId
+                    }
                 }
 
+
             }
-            id = item.itemId
+
+
+
             true
         }
 
@@ -98,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             .setPopExitAnim(R.anim.slide_out_right)
             .build()
     }
+
     override fun onBackPressed() {
         if (JZVideoPlayer.backPress()) {
             return
@@ -109,5 +127,20 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         JZVideoPlayer.releaseAllVideos()
+    }
+
+    private fun goToSignIn(){
+        Snackbar.make(
+            mBinding.root,
+            getString(R.string.txtSignIn),
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(getString(R.string.txtSignIn)) {
+                navHostFragment.findNavController().navigate(R.id.action_welcomeFragment_to_signInFragment)
+            }.show()
+    }
+
+    override fun onShowSnack() {
+        goToSignIn()
     }
 }

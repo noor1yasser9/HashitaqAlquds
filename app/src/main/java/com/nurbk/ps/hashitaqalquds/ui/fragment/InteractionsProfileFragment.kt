@@ -3,7 +3,6 @@ package com.nurbk.ps.hashitaqalquds.ui.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,20 +21,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PostProfileFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
+class InteractionsProfileFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
     val array: ArrayList<Post> = arrayListOf()
-
-    //    fun addData(posts: ArrayList<Post>) {
+//    fun addData(posts: ArrayList<Post>) {
 //        array.clear()
 //        array.addAll(posts)
 //        mAdapter.notifyDataSetChanged()
 //    }
+
+
     @Inject
     lateinit var viewModel: ProfileViewModel
     private val mAuth by lazy {
         FirebaseAuth.getInstance()
     }
-
 
     private val mBinding by lazy {
         FragmentPostProfileBinding.inflate(layoutInflater)
@@ -60,8 +59,9 @@ class PostProfileFragment : Fragment(), PostAdapter.OnListItemViewClickListener 
             adapter = mAdapter
         }
 
-        viewModel.getAllPostWhereUserId(mAuth.uid.toString())
-        viewModel.getAllPostWhereUserIdGetLiveData.observe(viewLifecycleOwner) {
+
+        viewModel.getPostLikeUser(mAuth.uid.toString())
+        viewModel.getPostLikesGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
                 }
@@ -71,7 +71,8 @@ class PostProfileFragment : Fragment(), PostAdapter.OnListItemViewClickListener 
 
                 }
                 Result.Status.SUCCESS -> {
-                    mAdapter.data = it.data as ArrayList<Post>
+                    val data = it.data as ArrayList<Post>
+                    mAdapter.data = (data)
                     mAdapter.notifyDataSetChanged()
                 }
             }

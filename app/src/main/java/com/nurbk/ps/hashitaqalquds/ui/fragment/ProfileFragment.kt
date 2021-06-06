@@ -27,10 +27,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
-    private val TAG: String = ProfileFragment::class.java.name
     private var loading: String? = null
     private val myPostFragment = PostProfileFragment()
-    private val myLikeFragment = PostProfileFragment()
+    private val myLikeFragment = InteractionsProfileFragment()
 
     @Inject
     lateinit var viewModel: ProfileViewModel
@@ -64,53 +63,23 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
         }
 
-        pagerAdapter.addFragment(myLikeFragment)
+
         pagerAdapter.addFragment(myPostFragment)
+        pagerAdapter.addFragment(myLikeFragment)
+
         mBinding.vpProfile.apply {
             adapter = pagerAdapter
         }
         TabLayoutMediator(mBinding.tabLayout, mBinding.vpProfile) { tab, position ->
             when (position) {
-                1 -> {
+                0 ->
                     tab.text = "المنشورات"
-                }
-                0 -> tab.text = "التفاعلات"
+
+                1 -> tab.text = "التفاعلات"
             }
         }.attach()
 
-        viewModel.getAllPostWhereUserId(mAuth.uid.toString())
-        viewModel.getAllPostWhereUserIdGetLiveData.observe(viewLifecycleOwner) {
-            when (it.status) {
-                Result.Status.EMPTY -> {
-                }
-                Result.Status.ERROR -> {
-                }
-                Result.Status.LOADING -> {
 
-                }
-                Result.Status.SUCCESS -> {
-                    Log.e("kkkkkkkkk",it.data.toString())
-                    myPostFragment.addData(it.data as ArrayList<Post>)
-                }
-            }
-        }
-
-        viewModel.getPostLikeUser(mAuth.uid.toString())
-        viewModel.getPostLikesGetLiveData.observe(viewLifecycleOwner) {
-            when (it.status) {
-                Result.Status.EMPTY -> {
-                }
-                Result.Status.ERROR -> {
-                }
-                Result.Status.LOADING -> {
-
-                }
-                Result.Status.SUCCESS -> {
-                    val data = it.data as ArrayList<Post>
-                    myLikeFragment.addData(data)
-                }
-            }
-        }
         viewModel.getWhereId(mAuth.uid.toString())
         viewModel.getWhereIdGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {

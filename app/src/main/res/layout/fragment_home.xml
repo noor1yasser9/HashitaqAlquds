@@ -43,6 +43,11 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
+<View
+    android:id="@+id/views"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    android:layout_gravity="bottom"
+    />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
