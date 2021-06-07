@@ -1,25 +1,20 @@
 package com.nurbk.ps.hashitaqalquds.ui.fragment
 
+import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.nurbk.ps.hashitaqalquds.BR
 import com.nurbk.ps.hashitaqalquds.R
-import com.nurbk.ps.hashitaqalquds.adapter.GenericAdapter
 import com.nurbk.ps.hashitaqalquds.adapter.PostAdapter
 import com.nurbk.ps.hashitaqalquds.databinding.FragmentHomeBinding
 import com.nurbk.ps.hashitaqalquds.model.Post
-import com.nurbk.ps.hashitaqalquds.model.Welcome
-import com.nurbk.ps.hashitaqalquds.model.getData
 import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.MemberItemDecoration
@@ -28,6 +23,7 @@ import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
@@ -82,6 +78,8 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
             adapter = mAdapter
             addItemDecoration(MemberItemDecoration());
         }
+
+
 
         isShowData = true
         viewModel.getAllPostsGetLiveData.observe(viewLifecycleOwner) {
@@ -143,6 +141,7 @@ class HomeFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
             }
         }
     }
+
 
 
 }

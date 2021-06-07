@@ -69,4 +69,6 @@ class HomeViewModel @Inject constructor(
 
     val getLikesGetLiveData get() = postRepository.getLikesGetLiveData
     val getCommentsGetLiveData get() = postRepository.getCommentsGetLiveData
+
+
 }

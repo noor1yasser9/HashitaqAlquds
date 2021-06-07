@@ -1,14 +1,18 @@
 package com.nurbk.ps.hashitaqalquds.ui.activity
 
+import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import cn.jzvd.JZVideoPlayer
@@ -18,17 +22,27 @@ import com.nurbk.ps.hashitaqalquds.databinding.ActivityMainBinding
 import com.nurbk.ps.hashitaqalquds.other.OnShowSnack
 import com.nurbk.ps.hashitaqalquds.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),OnShowSnack {
+class MainActivity : AppCompatActivity(), OnShowSnack {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var navHostFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val shared = PreferencesManager(this)
+
+        setLocale("ar")
+        if (shared.isDark)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL;
+//        setNightMode( false)
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -50,7 +64,7 @@ class MainActivity : AppCompatActivity(),OnShowSnack {
         mBinding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.profileFragment -> {
-                    if (PreferencesManager(this).isLogin) {
+                    if (shared.isLogin) {
                         if (item.itemId != id)
                             navController.navigate(R.id.profileFragment, null, getNavOptions())
                         id = item.itemId
@@ -80,6 +94,7 @@ class MainActivity : AppCompatActivity(),OnShowSnack {
 
             true
         }
+
 
 
         navHostFragment.findNavController()
@@ -129,18 +144,28 @@ class MainActivity : AppCompatActivity(),OnShowSnack {
         JZVideoPlayer.releaseAllVideos()
     }
 
-    private fun goToSignIn(){
+    private fun goToSignIn() {
         Snackbar.make(
             mBinding.root,
             getString(R.string.txtSignIn),
             Snackbar.LENGTH_LONG
         )
             .setAction(getString(R.string.txtSignIn)) {
-                navHostFragment.findNavController().navigate(R.id.action_welcomeFragment_to_signInFragment)
+                navHostFragment.findNavController()
+                    .navigate(R.id.action_welcomeFragment_to_signInFragment)
             }.show()
     }
 
     override fun onShowSnack() {
         goToSignIn()
+    }
+
+    fun setLocale(lang: String?) {
+        val myLocale = Locale(lang)
+        val res: Resources = resources
+        val dm: DisplayMetrics = res.displayMetrics
+        val conf: Configuration = res.configuration
+        conf.locale = myLocale
+        res.updateConfiguration(conf, dm)
     }
 }

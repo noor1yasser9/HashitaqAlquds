@@ -60,7 +60,7 @@ class PostProfileFragment : Fragment(), PostAdapter.OnListItemViewClickListener 
             adapter = mAdapter
         }
 
-        viewModel.getAllPostWhereUserId(mAuth.uid.toString())
+
         viewModel.getAllPostWhereUserIdGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {

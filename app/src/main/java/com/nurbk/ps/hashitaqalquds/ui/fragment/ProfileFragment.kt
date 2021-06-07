@@ -21,6 +21,7 @@ import com.nurbk.ps.hashitaqalquds.other.setToolbarView
 import com.nurbk.ps.hashitaqalquds.ui.dialog.LoadingDialog
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
+import com.nurbk.ps.hashitaqalquds.viewmodel.PostViewModel
 import com.nurbk.ps.hashitaqalquds.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -32,11 +33,9 @@ class ProfileFragment : Fragment() {
     private val myLikeFragment = InteractionsProfileFragment()
 
     @Inject
-    lateinit var viewModel: ProfileViewModel
+    lateinit var viewModel: PostViewModel
 
-    private val mAuth by lazy {
-        FirebaseAuth.getInstance()
-    }
+
     private lateinit var loadingDialog: LoadingDialog
 
 
@@ -80,7 +79,7 @@ class ProfileFragment : Fragment() {
         }.attach()
 
 
-        viewModel.getWhereId(mAuth.uid.toString())
+
         viewModel.getWhereIdGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {

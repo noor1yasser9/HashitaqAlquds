@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.nurbk.ps.hashitaqalquds.model.User
+import com.nurbk.ps.hashitaqalquds.other.IS_DARK
 import com.nurbk.ps.hashitaqalquds.other.IS_LOGIN
 import com.nurbk.ps.hashitaqalquds.other.PREFERENCES_NAME
 import com.nurbk.ps.hashitaqalquds.other.USER_PROFILE
@@ -19,6 +20,8 @@ class PreferencesManager(private val mContext: Context) {
         }
     val isLogin: Boolean
         get() = sharedPreferences.getBoolean(IS_LOGIN, false)
+    val isDark: Boolean
+        get() = sharedPreferences.getBoolean(IS_DARK, false)
 
     fun logOut() {
         editor.clear().apply()

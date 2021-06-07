@@ -66,12 +66,12 @@ class SettingFragment : Fragment(), GenericAdapter.OnListItemViewClickListener<S
 
             }
             TWO -> {
+
+            }
+            THREE -> {
                 FirebaseAuth.getInstance().signOut()
                 PreferencesManager(requireContext()).logOut()
                 findNavController().navigate(R.id.action_settingFragment_to_welcomeFragment)
-            }
-            THREE -> {
-
             }
         }
     }

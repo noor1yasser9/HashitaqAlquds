@@ -16,25 +16,18 @@ import com.nurbk.ps.hashitaqalquds.model.Post
 import com.nurbk.ps.hashitaqalquds.other.*
 import com.nurbk.ps.hashitaqalquds.util.Result
 import com.nurbk.ps.hashitaqalquds.viewmodel.HomeViewModel
+import com.nurbk.ps.hashitaqalquds.viewmodel.PostViewModel
 import com.nurbk.ps.hashitaqalquds.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class InteractionsProfileFragment : Fragment(), PostAdapter.OnListItemViewClickListener {
-    val array: ArrayList<Post> = arrayListOf()
-//    fun addData(posts: ArrayList<Post>) {
-//        array.clear()
-//        array.addAll(posts)
-//        mAdapter.notifyDataSetChanged()
-//    }
 
 
     @Inject
-    lateinit var viewModel: ProfileViewModel
-    private val mAuth by lazy {
-        FirebaseAuth.getInstance()
-    }
+    lateinit var viewModel: PostViewModel
+
 
     private val mBinding by lazy {
         FragmentPostProfileBinding.inflate(layoutInflater)
@@ -60,7 +53,7 @@ class InteractionsProfileFragment : Fragment(), PostAdapter.OnListItemViewClickL
         }
 
 
-        viewModel.getPostLikeUser(mAuth.uid.toString())
+
         viewModel.getPostLikesGetLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.EMPTY -> {
