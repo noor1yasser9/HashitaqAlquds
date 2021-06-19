@@ -19,6 +19,7 @@ Through the application, you can register, enter and browse all publications, an
 - LiveData
 - Firebase
 
-
+<!--
 🌟 Features App
 🔜 New Features and Bugs will be fixed on the next update (very soon) :
+-->
