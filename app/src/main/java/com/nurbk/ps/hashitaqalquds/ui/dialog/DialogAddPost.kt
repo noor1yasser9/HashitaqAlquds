@@ -13,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -206,16 +208,23 @@ class DialogAddPost : BottomSheetDialogFragment() {
         ) {
             type = PHOTO_TYPE
             media = data!!.data!!
+            mBinding.imagePost.setImageURI(media)
         } else if (requestCode == REQUEST_VIDEO_CODE &&
             resultCode == Activity.RESULT_OK
         ) {
             type = VIDEO_TYPE
             media = data!!.data!!
+            Glide.with(requireContext()).load("empty")
+                .thumbnail(Glide.with(requireActivity()).load(media))
+                .centerCrop()
+                .into(mBinding.imagePost)
         } else if (requestCode == REQUEST_FILE_CODE &&
             resultCode == Activity.RESULT_OK
         ) {
             type = PDF_TYPE
             media = data!!.data!!
+            mBinding.imagePost.setImageResource(R.drawable.ic_pdf)
         }
+        mBinding.imagePost.isVisible = true
     }
 }

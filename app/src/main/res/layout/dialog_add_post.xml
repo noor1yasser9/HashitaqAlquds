@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:toots="http://schemas.android.com/tools">
 
     <data>
 
@@ -136,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/btnVideo"
+                app:layout_constraintTop_toBottomOf="@+id/imagePost"
                 app:layout_constraintWidth_percent="0.9" />
 
             <View
@@ -148,6 +149,18 @@
                 app:layout_constraintStart_toStartOf="@+id/btnShare"
                 app:layout_constraintTop_toBottomOf="@+id/btnShare" />
 
+            <ImageView
+                android:id="@+id/imagePost"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/ic_pdf"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/btnVideo"
+                toots:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

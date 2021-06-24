@@ -44,6 +44,7 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_margin="@dimen/_40sdp"
+                android:backgroundTint="@color/logoColor"
                 android:src="@drawable/ic_cloud"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +55,10 @@
                 android:layout_height="@dimen/_80sdp"
                 android:layout_marginHorizontal="@dimen/_70sdp"
                 android:layout_marginVertical="@dimen/_90sdp"
+                android:layout_marginStart="88dp"
+                android:layout_marginBottom="116dp"
                 android:alpha="0.8"
+                android:backgroundTint="@color/logoColor"
                 android:src="@drawable/ic_cloud"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -65,6 +69,7 @@
                 android:layout_height="@dimen/_60sdp"
                 android:layout_margin="@dimen/_30sdp"
                 android:alpha="0.8"
+                android:backgroundTint="@color/logoColor"
                 android:src="@drawable/ic_cloud"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -75,6 +80,7 @@
                 android:layout_height="@dimen/_70sdp"
                 android:layout_margin="@dimen/_50sdp"
                 android:alpha="0.8"
+                android:backgroundTint="@color/logoColor"
                 android:src="@drawable/ic_cloud"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +95,7 @@
                 android:layout_height="@dimen/_70sdp"
                 android:layout_margin="@dimen/_50sdp"
                 android:alpha="0.8"
+                android:backgroundTint="@color/logoColor"
                 android:src="@drawable/ic_cloud"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,12 +105,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSignIn"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_54sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginVertical="@dimen/_16sdp"
                 android:layout_marginTop="28dp"
                 android:backgroundTint="@color/green_900"
                 android:text="@string/txtSignIn"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_20sdp"
                 app:cornerRadius="@dimen/_4sdp"
                 app:layout_constraintEnd_toEndOf="@+id/txtPassword"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -115,11 +122,11 @@
                 android:id="@+id/btnGaset"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_54sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_marginVertical="@dimen/_8sdp"
                 android:text="@string/txtGest"
                 android:textColor="@color/green_900"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_20sdp"
                 app:cornerRadius="@dimen/_4sdp"
                 app:layout_constraintEnd_toEndOf="@+id/txtPassword"
                 app:layout_constraintStart_toStartOf="@+id/txtPassword"
@@ -148,7 +155,7 @@
                     android:fontFamily="@font/zahra_ln_line_grunge"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:textSize="@dimen/_20ssp" />
+                    android:textSize="@dimen/_18ssp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,16 +179,17 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/zahra_ln_line_grunge"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/_20ssp" />
+                    android:textSize="@dimen/_18ssp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/_8sdp"
                 android:text="@string/forGotPassword"
                 android:textSize="@dimen/_16sdp"
-                android:padding="@dimen/_8sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/txtPassword"
                 app:layout_constraintStart_toStartOf="@+id/txtPassword"
                 app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
@@ -190,13 +198,14 @@
             <TextView
                 android:id="@+id/createSignUp"
                 android:layout_width="0dp"
-                android:layout_marginVertical="@dimen/_16sdp"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_16sdp"
+                android:gravity="center"
                 android:padding="@dimen/_8sdp"
                 android:text="@string/createAccount"
-                android:gravity="center"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtPassword"
                 app:layout_constraintStart_toStartOf="@+id/txtPassword"
                 app:layout_constraintTop_toBottomOf="@+id/btnGaset" />
